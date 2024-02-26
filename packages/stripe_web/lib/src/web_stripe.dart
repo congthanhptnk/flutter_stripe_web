@@ -112,16 +112,13 @@ class WebStripe extends StripePlatform {
     PaymentMethodOptions? options,
   ]) async {
     assert(params != null, 'params are not allowed to be null on the web');
-    final response =
-        await params!.maybeWhen<Future<stripe_js.PaymentIntentResponse>>(
+    final response = await params!.maybeWhen<Future<stripe_js.PaymentIntentResponse>>(
       card: (usage) {
         return js.confirmCardPayment(
           paymentIntentClientSecret,
           data: stripe_js.ConfirmCardPaymentData(
             paymentMethod: stripe_js.CardPaymentMethodDetails(card: element!),
-            setupFutureUsage: (options?.setupFutureUsage ??
-                    PaymentIntentsFutureUsage.OnSession)
-                .toJs(),
+            setupFutureUsage: (options?.setupFutureUsage ?? PaymentIntentsFutureUsage.OnSession).toJs(),
           ),
         );
       },
@@ -144,9 +141,7 @@ class WebStripe extends StripePlatform {
             paymentMethod: stripe_js.CardPaymentMethodDetails.token(
               card: stripe_js.CardTokenPaymentMethod(token: data.token),
             ),
-            setupFutureUsage: (options?.setupFutureUsage ??
-                    PaymentIntentsFutureUsage.OnSession)
-                .toJs(),
+            setupFutureUsage: (options?.setupFutureUsage ?? PaymentIntentsFutureUsage.OnSession).toJs(),
           ),
         );
       },
@@ -188,8 +183,7 @@ class WebStripe extends StripePlatform {
     return response.paymentIntent!.parse();
   }
 
-  Future<PaymentIntent> confirmIdealPayment(
-      String paymentIntentClientSecret, PaymentMethodDataIdeal paymentData,
+  Future<PaymentIntent> confirmIdealPayment(String paymentIntentClientSecret, PaymentMethodDataIdeal paymentData,
       {String? returnUrl}) async {
     if (paymentData.bankName == null) throw 'bankName is required for web';
     // https://stripe.com/docs/js/payment_intents/confirm_alipay_payment#stripe_confirm_alipay_payment-options
@@ -239,8 +233,7 @@ class WebStripe extends StripePlatform {
     PaymentMethodParams data,
     PaymentMethodOptions? options,
   ) async {
-    final response = await data
-        .maybeWhen<Future<stripe_js.SetupIntentResponse>>(card: (params) {
+    final response = await data.maybeWhen<Future<stripe_js.SetupIntentResponse>>(card: (params) {
       final data = stripe_js.ConfirmCardSetupData(
         paymentMethod: stripe_js.CardPaymentMethodDetails(
           card: element!,
@@ -261,11 +254,27 @@ class WebStripe extends StripePlatform {
     return response.setupIntent!.parse();
   }
 
+  Future<SetupIntent> confirmSetup(
+    ConfirmPaymentElementOptions options,
+  ) async {
+    final response = await js.confirmSetup(
+      stripe_js.ConfirmPaymentOptions(
+        elements: elements!,
+        confirmParams: options.confirmParams,
+        redirect: options.redirect,
+      ),
+    );
+
+    if (response.error != null) {
+      throw response.error!;
+    } else {
+      return response.setupIntent!.parse();
+    }
+  }
+
   @override
-  Future<PaymentIntent> handleNextAction(String paymentIntentClientSecret,
-      {String? returnURL}) async {
-    final stripe_js.PaymentIntentResponse response =
-        await _stripe.handleCardAction(paymentIntentClientSecret);
+  Future<PaymentIntent> handleNextAction(String paymentIntentClientSecret, {String? returnURL}) async {
+    final stripe_js.PaymentIntentResponse response = await _stripe.handleCardAction(paymentIntentClientSecret);
     return response.paymentIntent!.parse();
   }
 
@@ -353,8 +362,7 @@ class WebStripe extends StripePlatform {
   }
 
   @override
-  Future<PaymentMethod> createGooglePayPaymentMethod(
-      CreateGooglePayPaymentParams params) {
+  Future<PaymentMethod> createGooglePayPaymentMethod(CreateGooglePayPaymentParams params) {
     throw WebUnsupportedError.method('createGooglePayPaymentMethod');
   }
 
@@ -364,8 +372,7 @@ class WebStripe extends StripePlatform {
   }
 
   @override
-  Future<PaymentSheetPaymentOption?> initPaymentSheet(
-      SetupPaymentSheetParameters params) {
+  Future<PaymentSheetPaymentOption?> initPaymentSheet(SetupPaymentSheetParameters params) {
     throw WebUnsupportedError.method('initPaymentSheet');
   }
 
@@ -439,8 +446,7 @@ class WebStripe extends StripePlatform {
   Widget buildPaymentRequestButton({
     Key? key,
     required ui.VoidCallback onPressed,
-    required PlatformPayWebPaymentRequestCreateOptions
-        paymentRequestCreateOptions,
+    required PlatformPayWebPaymentRequestCreateOptions paymentRequestCreateOptions,
     BoxConstraints? constraints,
     PlatformButtonType? type,
     PlatformButtonStyle? style,
@@ -456,17 +462,13 @@ class WebStripe extends StripePlatform {
 
   @override
   Future<PaymentIntent> collectBankAccount(
-      {required bool isPaymentIntent,
-      required String clientSecret,
-      required CollectBankAccountParams params}) {
+      {required bool isPaymentIntent, required String clientSecret, required CollectBankAccountParams params}) {
     throw UnimplementedError();
   }
 
   @override
   Future<PaymentIntent> verifyPaymentIntentWithMicrodeposits(
-      {required bool isPaymentIntent,
-      required String clientSecret,
-      required VerifyMicroDepositsParams params}) {
+      {required bool isPaymentIntent, required String clientSecret, required VerifyMicroDepositsParams params}) {
     throw UnimplementedError();
   }
 
@@ -476,14 +478,12 @@ class WebStripe extends StripePlatform {
   }
 
   @override
-  Future<FinancialConnectionTokenResult> collectBankAccountToken(
-      {required String clientSecret}) {
+  Future<FinancialConnectionTokenResult> collectBankAccountToken({required String clientSecret}) {
     throw WebUnsupportedError.method('collectBankAccountToken');
   }
 
   @override
-  Future<FinancialConnectionSessionResult> collectFinancialConnectionsAccounts(
-      {required String clientSecret}) {
+  Future<FinancialConnectionSessionResult> collectFinancialConnectionsAccounts({required String clientSecret}) {
     throw WebUnsupportedError.method('collectFinancialConnectionsAccounts');
   }
 
@@ -503,24 +503,21 @@ class WebStripe extends StripePlatform {
     IsGooglePaySupportedParams? params,
     PlatformPayWebPaymentRequestCreateOptions? paymentRequestOptions,
   }) {
-    final paymentRequest = js.paymentRequest((paymentRequestOptions ??
-            PlatformPayWebPaymentRequestCreateOptions.defaultOptions)
-        .toJS());
+    final paymentRequest =
+        js.paymentRequest((paymentRequestOptions ?? PlatformPayWebPaymentRequestCreateOptions.defaultOptions).toJS());
 
     return paymentRequest.isPaymentAvailable;
   }
 
   @override
   Future<PaymentIntent> platformPayConfirmPaymentIntent(
-      {required String clientSecret,
-      required PlatformPayConfirmParams params}) {
+      {required String clientSecret, required PlatformPayConfirmParams params}) {
     throw WebUnsupportedError.method('platformPayConfirmPaymentIntent');
   }
 
   @override
   Future<SetupIntent> platformPayConfirmSetupIntent(
-      {required String clientSecret,
-      required PlatformPayConfirmParams params}) {
+      {required String clientSecret, required PlatformPayConfirmParams params}) {
     throw WebUnsupportedError.method('platformPayConfirmSetupIntent');
   }
 
@@ -530,23 +527,18 @@ class WebStripe extends StripePlatform {
     bool usesDeprecatedTokenFlow = false,
   }) {
     if (!(params is PlatformPayPaymentMethodParamsWeb)) {
-      throw WebUnsupportedError(
-          "platformPayCreatePaymentMethod - ${params.runtimeType} is not supported on web");
+      throw WebUnsupportedError("platformPayCreatePaymentMethod - ${params.runtimeType} is not supported on web");
     }
 
     Completer<PlatformPayPaymentMethod> completer = Completer();
-    stripe_js.PaymentRequest paymentRequest =
-        js.paymentRequest(params.options.toJS());
+    stripe_js.PaymentRequest paymentRequest = js.paymentRequest(params.options.toJS());
     paymentRequest.onPaymentMethod((response) {
-      completer.complete(PlatformPayPaymentMethod(
-          paymentMethod: response.paymentMethod.parse()));
+      completer.complete(PlatformPayPaymentMethod(paymentMethod: response.paymentMethod.parse()));
       response.complete('success');
     });
     paymentRequest.onCancel(() {
       completer.completeError(StripeException(
-          error: LocalizedErrorMessage(
-              code: FailureCode.Canceled,
-              message: 'Payment request cancelled')));
+          error: LocalizedErrorMessage(code: FailureCode.Canceled, message: 'Payment request cancelled')));
     });
     paymentRequest.isPaymentAvailable.then((available) {
       if (available) {
@@ -554,9 +546,7 @@ class WebStripe extends StripePlatform {
       } else {
         completer.completeError(StripeException(
             error: LocalizedErrorMessage(
-                code: FailureCode.Failed,
-                message:
-                    "No enabled wallets are available for payment method creation")));
+                code: FailureCode.Failed, message: "No enabled wallets are available for payment method creation")));
       }
     });
 
@@ -564,14 +554,12 @@ class WebStripe extends StripePlatform {
   }
 
   @override
-  Future<void> updatePlatformSheet(
-      {required PlatformPaySheetUpdateParams params}) {
+  Future<void> updatePlatformSheet({required PlatformPaySheetUpdateParams params}) {
     throw WebUnsupportedError.method('updatePlatformSheet');
   }
 
   @override
-  Future<void> configurePlatformOrderTracking(
-      {required PlatformPayOrderDetails orderDetails}) {
+  Future<void> configurePlatformOrderTracking({required PlatformPayOrderDetails orderDetails}) {
     throw WebUnsupportedError.method('configurePlatformOrderTracking');
   }
 
@@ -581,28 +569,23 @@ class WebStripe extends StripePlatform {
   }
 
   @override
-  Future<SetupIntent> handleNextActionForSetupIntent(
-      String setupIntentClientSecret,
-      {String? returnURL}) {
+  Future<SetupIntent> handleNextActionForSetupIntent(String setupIntentClientSecret, {String? returnURL}) {
     throw WebUnsupportedError.method('handleNextActionForSetupIntent');
   }
 
   @override
-  Future<CustomerSheetResult?> initCustomerSheet(
-      CustomerSheetInitParams params) {
+  Future<CustomerSheetResult?> initCustomerSheet(CustomerSheetInitParams params) {
     throw WebUnsupportedError.method('initCustomerSheet');
   }
 
   @override
-  Future<CustomerSheetResult?> presentCustomerSheet(
-      {CustomerSheetPresentParams? options}) {
+  Future<CustomerSheetResult?> presentCustomerSheet({CustomerSheetPresentParams? options}) {
     throw WebUnsupportedError.method('presentCustomerSheet');
   }
 
   @override
   Future<CustomerSheetResult?> retrieveCustomerSheetPaymentOptionSelection() {
-    throw WebUnsupportedError.method(
-        'retrieveCustomerSheetPaymentOptionSelection');
+    throw WebUnsupportedError.method('retrieveCustomerSheetPaymentOptionSelection');
   }
 }
 
@@ -613,19 +596,13 @@ class WebUnsupportedError extends Error implements UnsupportedError {
   WebUnsupportedError([this.message]);
 
   WebUnsupportedError.method([String? method])
-      : message = (method != null)
-            ? "$method is not supported for Web"
-            : "not supported for Web";
+      : message = (method != null) ? "$method is not supported for Web" : "not supported for Web";
 
   @override
-  String toString() => (message != null)
-      ? "WebUnsupportedError: $message"
-      : "WebUnsupportedError";
+  String toString() => (message != null) ? "WebUnsupportedError: $message" : "WebUnsupportedError";
 }
 
 extension CanMakePayment on stripe_js.PaymentRequest {
-  Future<bool> get isPaymentAvailable => this.canMakePayment().then((value) =>
-      value?.applePay == true ||
-      value?.googlePay == true ||
-      value?.link == true);
+  Future<bool> get isPaymentAvailable =>
+      this.canMakePayment().then((value) => value?.applePay == true || value?.googlePay == true || value?.link == true);
 }

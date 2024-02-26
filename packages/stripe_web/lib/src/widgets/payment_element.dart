@@ -1,13 +1,12 @@
 import 'dart:html';
-
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:stripe_js/stripe_api.dart' as js;
+import 'package:stripe_js/stripe_js.dart' as js;
 
 import '../../flutter_stripe_web.dart';
-import 'package:stripe_js/stripe_js.dart' as js;
-import 'package:stripe_js/stripe_api.dart' as js;
 
 export 'package:stripe_js/stripe_api.dart' show PaymentElementLayout;
 
@@ -29,6 +28,7 @@ class PaymentElement extends StatefulWidget {
     this.autofocus = false,
     this.layout = PaymentElementLayout.accordion,
     this.appearance,
+    this.options,
   })  : assert(constraints == null || constraints.debugAssertIsValid()),
         constraints = (width != null || height != null)
             ? constraints?.tighten(width: width, height: height) ??
@@ -47,6 +47,7 @@ class PaymentElement extends StatefulWidget {
   final bool autofocus;
   final PaymentElementLayout layout;
   final js.ElementAppearance? appearance;
+  final js.PaymentElementOptions? options;
   @override
   PaymentElementState createState() => PaymentElementState();
 }
@@ -59,8 +60,7 @@ class PaymentElementState extends State<PaymentElement> {
     ..style.border = 'none'
     ..style.width = '100%'
     ..style.height = '$height';
-  late MutationObserver? mutationObserver =
-      MutationObserver((entries, observer) {
+  late MutationObserver? mutationObserver = MutationObserver((entries, observer) {
     if (document.getElementById('payment-element') != null) {
       mutationObserver?.disconnect();
       element = elements!.createPayment(elementOptions())
@@ -69,8 +69,7 @@ class PaymentElementState extends State<PaymentElement> {
         ..onFocus(requestFocus)
         ..onChange(onCardChanged);
       mutationObserver = MutationObserver((entries, observer) {
-        final stripeElements =
-            document.getElementsByClassName('__PrivateStripeElement');
+        final stripeElements = document.getElementsByClassName('__PrivateStripeElement');
         if (stripeElements.isNotEmpty) {
           mutationObserver?.disconnect();
           final element = stripeElements.first as HtmlElement;
@@ -118,6 +117,10 @@ class PaymentElementState extends State<PaymentElement> {
   }
 
   void requestFocus(response) {
+    if (widget.onFocus != null) {
+      widget.onFocus!(null);
+    }
+
     _effectiveNode.requestFocus();
   }
 
@@ -144,8 +147,7 @@ class PaymentElementState extends State<PaymentElement> {
             element?.blur(); */
       },
       child: ConstrainedBox(
-        constraints:
-            BoxConstraints(maxWidth: double.infinity, maxHeight: height),
+        constraints: BoxConstraints(maxWidth: double.infinity, maxHeight: height),
         child: const HtmlElementView(viewType: 'stripe_payment_element'),
       ),
     );
@@ -160,7 +162,7 @@ class PaymentElementState extends State<PaymentElement> {
   }
 
   js.PaymentElementOptions elementOptions() {
-    return js.PaymentElementOptions(layout: widget.layout);
+    return widget.options ?? js.PaymentElementOptions(layout: widget.layout);
   }
 
   @override

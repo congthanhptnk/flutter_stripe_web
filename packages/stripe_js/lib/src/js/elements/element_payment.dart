@@ -38,4 +38,12 @@ extension ExtendedPaymentElement on PaymentElement {
       onEvent(PaymentElementChangeEvent.fromJson(json));
     }));
   }
+
+  void onFocus(EventCallback<PaymentElementChangeEvent> onEvent) {
+    return on("focus", allowInterop((e) {
+      final value = dartify(e) as Map<dynamic, dynamic>;
+      final json = value.cast<String, dynamic>();
+      onEvent(PaymentElementChangeEvent.fromJson(json));
+    }));
+  }
 }
