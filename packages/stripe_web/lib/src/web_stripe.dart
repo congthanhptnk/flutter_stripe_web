@@ -414,10 +414,12 @@ class WebStripe extends StripePlatform {
 
   Future<SetupIntent> confirmSetupElement(
     ConfirmSetupElementOptions options,
+    String? clientSecret,
   ) async {
     final response = await js.confirmSetup(
       stripe_js.ConfirmSetupOptions(
         elements: elements!,
+        clientSecret: clientSecret,
         confirmParams: options.confirmParams,
         redirect: options.redirect,
       ),
