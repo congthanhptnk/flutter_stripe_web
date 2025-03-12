@@ -360,7 +360,12 @@ class WebStripe extends StripePlatform {
 
   @override
   Future<SetupIntent> retrieveSetupIntent(String clientSecret) async {
-    throw UnimplementedError();
+    final response = await js.retrieveSetupIntent(clientSecret);
+    if (response.error != null) {
+      throw response.error!;
+    } else {
+      return response.setupIntent!.parse();
+    }
   }
 
   @override
