@@ -202,6 +202,7 @@ class PaymentSheetFragment(
       .billingDetailsCollectionConfiguration(billingDetailsConfig)
       .preferredNetworks(mapToPreferredNetworks(arguments?.getIntegerArrayList("preferredNetworks")))
       .allowsRemovalOfLastSavedPaymentMethod(allowsRemovalOfLastSavedPaymentMethod)
+      .paymentMethodLayout(PaymentSheet.PaymentMethodLayout.Horizontal)
     primaryButtonLabel?.let {
       configurationBuilder.primaryButtonLabel(it)
     }
