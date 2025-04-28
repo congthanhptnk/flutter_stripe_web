@@ -46,8 +46,8 @@ dart pub add flutter_stripe
 
 This plugin requires several changes to be able to work on Android devices. Please make sure you follow all these steps:
 
-1. Use Android 5.0 (API level 21) and above
-2. Use Kotlin version 1.5.0 and above: [example](https://github.com/flutter-stripe/flutter_stripe/blob/main/example/android/build.gradle)
+1. Use Android 5.0 (API level 21) and above.
+2. Use Kotlin version 1.8.0 and above: [example](https://github.com/flutter-stripe/flutter_stripe/blob/main/example/android/settings.gradle#L22)
 3. Requires Android Gradle plugin 8 and higher
 4. Using a descendant of `Theme.AppCompat` for your activity: [example](https://github.com/flutter-stripe/flutter_stripe/blob/main/example/android/app/src/main/res/values/styles.xml#L15), [example night theme](https://github.com/flutter-stripe/flutter_stripe/blob/main/example/android/app/src/main/res/values-night/styles.xml#L16)
 5. Using an up-to-date Android gradle build tools version: [example](https://github.com/flutter-stripe/flutter_stripe/blob/main/example/android/build.gradle#L9) and an up-to-date gradle version accordingly: [example](https://github.com/flutter-stripe/flutter_stripe/blob/main/example/android/gradle/wrapper/gradle-wrapper.properties#L6) 
@@ -60,7 +60,13 @@ This plugin requires several changes to be able to work on Android devices. Plea
 -dontwarn com.stripe.android.pushProvisioning.PushProvisioningActivityStarter
 -dontwarn com.stripe.android.pushProvisioning.PushProvisioningEphemeralKeyProvider
 ```
-8. Rebuild the app, as the above changes don't update with hot reload
+8. Add the following line to your `gradle.properties` file: [example](https://github.com/flutter-stripe/flutter_stripe/blob/master/example/android/gradle.properties)
+```properties
+android.enableR8.fullMode=false
+```
+This will prevent crashes with the Stripe SDK on Android (see [issue](https://github.com/flutter-stripe/flutter_stripe/issues/1909)).
+
+9. Rebuild the app, as the above changes don't update with hot reload
 
 These changes are needed because the Android Stripe SDK requires the use of the AppCompat theme for their UI components and the Support Fragment Manager for the Payment Sheets
 
@@ -81,12 +87,11 @@ For card scanning add the following to your Info.plist:
 ```xml
 <key>NSCameraUsageDescription</key>
 <string>Scan your card to add it automatically</string>
-<key>NSCameraUsageDescription
-&lt;string&gt;To scan cards&lt;/string&gt;</key>
+<key>NSCameraUsageDescription</key>
 <string>To scan cards</string>
 ```
 
-#### Web (Experimental)
+#### Web
 
 Now you can use Stripe with Flutter web! Notice right now it is highly experimental and only a subset of features is implemented. Namely:
 
@@ -94,7 +99,10 @@ Now you can use Stripe with Flutter web! Notice right now it is highly experimen
 - Confirm payment intent
 - Confirm setup intent
 - Create token
-- Confirm payment element (recommended way of handling payments on web)
+
+### Supported widgets
+- [Confirm payment element](https://github.com/flutter-stripe/flutter_stripe/blob/main/example/lib/screens/payment_sheet/payment_element/platforms/payment_element_web.dart) (recommended way of handling payments on web)
+- [Express checkout](https://github.com/flutter-stripe/flutter_stripe/blob/main/example/lib/screens/payment_sheet/express_checkout/platforms/express_checkout_element_web.dart)
 
 To use Stripe on web, it is required to add `flutter_stripe_web` in your pubspec file
 

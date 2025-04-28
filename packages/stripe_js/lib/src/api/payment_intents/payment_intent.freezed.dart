@@ -12,7 +12,7 @@ part of 'payment_intent.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PaymentIntent _$PaymentIntentFromJson(Map<String, dynamic> json) {
   return _PaymentIntent.fromJson(json);
@@ -171,7 +171,8 @@ mixin _$PaymentIntent {
 
   /// The list of payment method types (e.g. card) that this PaymentIntent
   /// is allowed to use.
-  @JsonKey(name: "payment_method_types")
+  @JsonKey(
+      name: "payment_method_types", unknownEnumValue: PaymentMethodType.unknown)
   List<PaymentMethodType> get paymentMethodTypes =>
       throw _privateConstructorUsedError;
 
@@ -235,8 +236,12 @@ mixin _$PaymentIntent {
   @JsonKey(name: "transfer_group")
   dynamic get transferGroup => throw _privateConstructorUsedError;
 
+  /// Serializes this PaymentIntent to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PaymentIntent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PaymentIntentCopyWith<PaymentIntent> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -280,7 +285,9 @@ abstract class $PaymentIntentCopyWith<$Res> {
       @JsonKey(name: "payment_method") String? paymentMethod,
       @JsonKey(name: "payment_method_options")
       Map<dynamic, dynamic> paymentMethodOptions,
-      @JsonKey(name: "payment_method_types")
+      @JsonKey(
+          name: "payment_method_types",
+          unknownEnumValue: PaymentMethodType.unknown)
       List<PaymentMethodType> paymentMethodTypes,
       dynamic processing,
       @JsonKey(name: "receipt_email") String? receiptEmail,
@@ -312,6 +319,8 @@ class _$PaymentIntentCopyWithImpl<$Res, $Val extends PaymentIntent>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PaymentIntent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -510,6 +519,8 @@ class _$PaymentIntentCopyWithImpl<$Res, $Val extends PaymentIntent>
     ) as $Val);
   }
 
+  /// Create a copy of PaymentIntent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PaymentIntentAmountDetailsCopyWith<$Res>? get amountDetails {
@@ -523,6 +534,8 @@ class _$PaymentIntentCopyWithImpl<$Res, $Val extends PaymentIntent>
     });
   }
 
+  /// Create a copy of PaymentIntent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PaymentIntentAutomaticPaymentMethodsCopyWith<$Res>?
@@ -537,6 +550,8 @@ class _$PaymentIntentCopyWithImpl<$Res, $Val extends PaymentIntent>
     });
   }
 
+  /// Create a copy of PaymentIntent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $StripeErrorCopyWith<$Res>? get lastPaymentError {
@@ -549,6 +564,8 @@ class _$PaymentIntentCopyWithImpl<$Res, $Val extends PaymentIntent>
     });
   }
 
+  /// Create a copy of PaymentIntent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ShippingDetailsCopyWith<$Res>? get shipping {
@@ -563,11 +580,11 @@ class _$PaymentIntentCopyWithImpl<$Res, $Val extends PaymentIntent>
 }
 
 /// @nodoc
-abstract class _$$_PaymentIntentCopyWith<$Res>
+abstract class _$$PaymentIntentImplCopyWith<$Res>
     implements $PaymentIntentCopyWith<$Res> {
-  factory _$$_PaymentIntentCopyWith(
-          _$_PaymentIntent value, $Res Function(_$_PaymentIntent) then) =
-      __$$_PaymentIntentCopyWithImpl<$Res>;
+  factory _$$PaymentIntentImplCopyWith(
+          _$PaymentIntentImpl value, $Res Function(_$PaymentIntentImpl) then) =
+      __$$PaymentIntentImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -603,7 +620,9 @@ abstract class _$$_PaymentIntentCopyWith<$Res>
       @JsonKey(name: "payment_method") String? paymentMethod,
       @JsonKey(name: "payment_method_options")
       Map<dynamic, dynamic> paymentMethodOptions,
-      @JsonKey(name: "payment_method_types")
+      @JsonKey(
+          name: "payment_method_types",
+          unknownEnumValue: PaymentMethodType.unknown)
       List<PaymentMethodType> paymentMethodTypes,
       dynamic processing,
       @JsonKey(name: "receipt_email") String? receiptEmail,
@@ -630,13 +649,15 @@ abstract class _$$_PaymentIntentCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PaymentIntentCopyWithImpl<$Res>
-    extends _$PaymentIntentCopyWithImpl<$Res, _$_PaymentIntent>
-    implements _$$_PaymentIntentCopyWith<$Res> {
-  __$$_PaymentIntentCopyWithImpl(
-      _$_PaymentIntent _value, $Res Function(_$_PaymentIntent) _then)
+class __$$PaymentIntentImplCopyWithImpl<$Res>
+    extends _$PaymentIntentCopyWithImpl<$Res, _$PaymentIntentImpl>
+    implements _$$PaymentIntentImplCopyWith<$Res> {
+  __$$PaymentIntentImplCopyWithImpl(
+      _$PaymentIntentImpl _value, $Res Function(_$PaymentIntentImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PaymentIntent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -679,7 +700,7 @@ class __$$_PaymentIntentCopyWithImpl<$Res>
     Object? transferData = freezed,
     Object? transferGroup = freezed,
   }) {
-    return _then(_$_PaymentIntent(
+    return _then(_$PaymentIntentImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -838,8 +859,8 @@ class __$$_PaymentIntentCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PaymentIntent implements _PaymentIntent {
-  const _$_PaymentIntent(
+class _$PaymentIntentImpl implements _PaymentIntent {
+  const _$PaymentIntentImpl(
       {required this.id,
       this.object = "payment_intent",
       required this.amount,
@@ -871,7 +892,9 @@ class _$_PaymentIntent implements _PaymentIntent {
       @JsonKey(name: "payment_method") this.paymentMethod,
       @JsonKey(name: "payment_method_options")
       final Map<dynamic, dynamic> paymentMethodOptions = const {},
-      @JsonKey(name: "payment_method_types")
+      @JsonKey(
+          name: "payment_method_types",
+          unknownEnumValue: PaymentMethodType.unknown)
       final List<PaymentMethodType> paymentMethodTypes = const [],
       this.processing,
       @JsonKey(name: "receipt_email") this.receiptEmail,
@@ -888,8 +911,8 @@ class _$_PaymentIntent implements _PaymentIntent {
         _paymentMethodOptions = paymentMethodOptions,
         _paymentMethodTypes = paymentMethodTypes;
 
-  factory _$_PaymentIntent.fromJson(Map<String, dynamic> json) =>
-      _$$_PaymentIntentFromJson(json);
+  factory _$PaymentIntentImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PaymentIntentImplFromJson(json);
 
   /// Unique identifier for the object.
   @override
@@ -1087,7 +1110,8 @@ class _$_PaymentIntent implements _PaymentIntent {
   /// The list of payment method types (e.g. card) that this PaymentIntent
   /// is allowed to use.
   @override
-  @JsonKey(name: "payment_method_types")
+  @JsonKey(
+      name: "payment_method_types", unknownEnumValue: PaymentMethodType.unknown)
   List<PaymentMethodType> get paymentMethodTypes {
     if (_paymentMethodTypes is EqualUnmodifiableListView)
       return _paymentMethodTypes;
@@ -1170,10 +1194,10 @@ class _$_PaymentIntent implements _PaymentIntent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentIntent &&
+            other is _$PaymentIntentImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.object, object) || other.object == object) &&
             (identical(other.amount, amount) || other.amount == amount) &&
@@ -1245,7 +1269,7 @@ class _$_PaymentIntent implements _PaymentIntent {
                 .equals(other.transferGroup, transferGroup));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -1289,15 +1313,17 @@ class _$_PaymentIntent implements _PaymentIntent {
         const DeepCollectionEquality().hash(transferGroup)
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PaymentIntent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentIntentCopyWith<_$_PaymentIntent> get copyWith =>
-      __$$_PaymentIntentCopyWithImpl<_$_PaymentIntent>(this, _$identity);
+  _$$PaymentIntentImplCopyWith<_$PaymentIntentImpl> get copyWith =>
+      __$$PaymentIntentImplCopyWithImpl<_$PaymentIntentImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PaymentIntentToJson(
+    return _$$PaymentIntentImplToJson(
       this,
     );
   }
@@ -1338,7 +1364,9 @@ abstract class _PaymentIntent implements PaymentIntent {
       @JsonKey(name: "payment_method") final String? paymentMethod,
       @JsonKey(name: "payment_method_options")
       final Map<dynamic, dynamic> paymentMethodOptions,
-      @JsonKey(name: "payment_method_types")
+      @JsonKey(
+          name: "payment_method_types",
+          unknownEnumValue: PaymentMethodType.unknown)
       final List<PaymentMethodType> paymentMethodTypes,
       final dynamic processing,
       @JsonKey(name: "receipt_email") final String? receiptEmail,
@@ -1352,22 +1380,20 @@ abstract class _PaymentIntent implements PaymentIntent {
       required final PaymentIntentsStatus status,
       @JsonKey(name: "transfer_data") final dynamic transferData,
       @JsonKey(name: "transfer_group")
-      final dynamic transferGroup}) = _$_PaymentIntent;
+      final dynamic transferGroup}) = _$PaymentIntentImpl;
 
   factory _PaymentIntent.fromJson(Map<String, dynamic> json) =
-      _$_PaymentIntent.fromJson;
-
-  @override
+      _$PaymentIntentImpl.fromJson;
 
   /// Unique identifier for the object.
-  String get id;
   @override
+  String get id;
 
   /// String representing the object’s type.
   /// Objects of the same type share the same value.
   /// Value is "payment_intent".
-  String get object;
   @override
+  String get object;
 
   /// Amount intended to be collected by this PaymentIntent.
   /// A positive integer representing how much to charge in the
@@ -1376,28 +1402,28 @@ abstract class _PaymentIntent implements PaymentIntent {
   /// The minimum amount is $0.50 US or equivalent in charge currency.
   /// The amount value supports up to eight digits
   /// (e.g., a value of 99999999 for a USD charge of $999,999.99).
-  int get amount;
   @override
+  int get amount;
 
   /// The amount that can be captured with from this PaymentIntent (in cents).
+  @override
   @JsonKey(name: "amount_capturable")
   int? get amountCapturable;
-  @override
 
   /// Details about items included in the amount
+  @override
   @JsonKey(name: "amount_details")
   PaymentIntentAmountDetails? get amountDetails;
-  @override
 
   /// The amount that was collected from this PaymentIntent (in cents).
+  @override
   @JsonKey(name: "amount_received")
   int? get amountReceived;
-  @override
 
   /// CONNECT ONLY
   /// ID of the Connect application that created the PaymentIntent.
-  String? get application;
   @override
+  String? get application;
 
   /// CONNECT ONLY
   /// The amount of the application fee (if any) that will be requested to
@@ -1406,30 +1432,30 @@ abstract class _PaymentIntent implements PaymentIntent {
   /// capped at the total payment amount.
   /// For more information, see the PaymentIntents use
   /// case for connected accounts..
+  @override
   @JsonKey(name: "application_fee_amount")
   int? get applicationFeeAmount;
-  @override
 
   /// Settings to configure compatible payment methods from the
   /// Stripe Dashboard
+  @override
   @JsonKey(name: "automatic_payment_methods")
   PaymentIntentAutomaticPaymentMethods? get automaticPaymentMethods;
-  @override
 
   /// Populated when status is canceled, this is the time at which the
   /// PaymentIntent was canceled. Measured in seconds since the Unix epoch.
+  @override
   @JsonKey(name: "canceled_at")
   int? get canceledAt;
-  @override
 
   /// Reason for cancellation of this PaymentIntent,
   /// either user-provided
   /// (duplicate, fraudulent, requested_by_customer, or abandoned) or
   /// generated by Stripe internally
   /// (failed_invoice, void_invoice, or automatic).
+  @override
   @JsonKey(name: "cancellation_reason")
   PaymentIntentCancellationReason? get cancellationReason;
-  @override
 
   /// The client secret of this PaymentIntent. Used for client-side retrieval
   /// using a publishable key.
@@ -1440,27 +1466,27 @@ abstract class _PaymentIntent implements PaymentIntent {
   ///
   /// Refer to our docs to accept a payment and learn about how `client_secret`
   /// should be handled.
+  @override
   @JsonKey(name: "client_secret")
   String get clientSecret;
-  @override
 
   /// Controls when the funds will be captured from the customer’s account.
+  @override
   @JsonKey(name: "capture_method")
   PaymentIntentCaptureMethod get captureMethod;
   @override
   @JsonKey(name: "confirmation_method")
   PaymentIntentConfirmationMethod get confirmationMethod;
-  @override
 
   /// Time at which the object was created. Measured in seconds since the
   /// Unix epoch.
-  int? get created;
   @override
+  int? get created;
 
   /// Three-letter ISO currency code, in lowercase. Must be a supported
   /// currency.
-  String get currency;
   @override
+  String get currency;
 
   /// ID of the Customer this PaymentIntent belongs to, if one exists.
   /// Payment methods attached to other Customers cannot be used with this
@@ -1470,83 +1496,85 @@ abstract class _PaymentIntent implements PaymentIntent {
   /// this PaymentIntent’s payment method will be attached to the
   /// Customer after the PaymentIntent has been confirmed and any
   /// required actions from the user are complete.
-  String? get customer;
   @override
+  String? get customer;
 
   /// An arbitrary string attached to the object.
   /// Often useful for displaying to users.
-  String? get description;
   @override
+  String? get description;
 
   /// ID of the invoice that created this PaymentIntent, if it exists.
-  String? get invoice;
   @override
+  String? get invoice;
 
   /// The payment error encountered in the previous PaymentIntent confirmation.
   /// It will be cleared if the PaymentIntent is later updated for any reason.
+  @override
   @JsonKey(name: "last_payment_error")
   StripeError? get lastPaymentError;
-  @override
 
   /// The latest charge created by this payment intent.
+  @override
   @JsonKey(name: "latest_charge")
   String? get latestCharge;
-  @override
 
   /// Has the value true if the object exists in live mode or the
   /// value false if the object exists in test mode.
-  bool get livemode;
   @override
+  bool get livemode;
 
   /// Set of key-value pairs that you can attach to an object.
   /// This can be useful for storing additional information about the
   /// object in a structured format.
-  Map<String, dynamic> get metadata;
   @override
+  Map<String, dynamic> get metadata;
 
   /// If present, this property tells you what actions you need to
   /// take in order for your customer to fulfill a payment using the
   /// provided source.
+  @override
   @JsonKey(name: "next_action")
   dynamic get nextAction;
-  @override
 
   /// CONNECT ONLY
   /// The account (if any) for which the funds of the PaymentIntent are
   /// intended. See the PaymentIntents use case for connected accounts
   /// for details.
+  @override
   @JsonKey(name: "on_behalf_of")
   String? get onBehalfOf;
-  @override
 
   /// ID of the payment method used in this PaymentIntent.
+  @override
   @JsonKey(name: "payment_method")
   String? get paymentMethod;
-  @override
 
   /// Payment-method-specific configuration for this PaymentIntent.
+  @override
   @JsonKey(name: "payment_method_options")
   Map<dynamic, dynamic> get paymentMethodOptions;
-  @override
 
   /// The list of payment method types (e.g. card) that this PaymentIntent
   /// is allowed to use.
-  @JsonKey(name: "payment_method_types")
-  List<PaymentMethodType> get paymentMethodTypes;
   @override
+  @JsonKey(
+      name: "payment_method_types", unknownEnumValue: PaymentMethodType.unknown)
+  List<PaymentMethodType> get paymentMethodTypes;
 
   /// If present, this property tells you about the processing state of the payment.
-  dynamic get processing;
   @override
+  dynamic get processing;
 
   /// Email address that the receipt for the resulting payment will be sent to.
   /// If receipt_email is specified for a payment in live mode, a receipt
   /// will be sent regardless of your email settings.
-  @JsonKey(name: "receipt_email")
-  String? get receiptEmail;
-  @override // ID of the review associated with this PaymentIntent, if any.
-  String? get review;
   @override
+  @JsonKey(name: "receipt_email")
+  String?
+      get receiptEmail; // ID of the review associated with this PaymentIntent, if any.
+  @override
+  String? get review;
 
   /// Indicates that you intend to make future payments with this
   /// PaymentIntent’s payment method.
@@ -1558,52 +1586,56 @@ abstract class _PaymentIntent implements PaymentIntent {
   /// When processing card payments, Stripe also uses setup_future_usage
   /// to dynamically optimize your payment flow and comply with regional
   /// legislation and network rules, such as SCA.
+  @override
   @JsonKey(name: "setup_future_usage")
   PaymentIntentSetupFutureUsage? get setupFutureUsage;
-  @override
 
   /// Shipping information for this PaymentIntent.
-  ShippingDetails? get shipping;
   @override
+  ShippingDetails? get shipping;
 
   /// For non-card charges, you can use this value as the complete
   /// description that appears on your customers’ statements.
   /// Must contain at least one letter, maximum 22 characters.
+  @override
   @JsonKey(name: "statement_descriptor")
   String? get statementDescriptor;
-  @override
 
   /// Provides information about a card payment that customers see on
   /// their statements.
   /// Concatenated with the prefix (shortened descriptor) or statement
   /// descriptor that’s set on the account to form the complete statement
   /// descriptor. Maximum 22 characters for the concatenated descriptor.
+  @override
   @JsonKey(name: "statement_descriptor_suffix")
   String? get statementDescriptorSuffix;
-  @override
 
   /// Status of this PaymentIntent, one of requires_payment_method,
   /// requires_confirmation, requires_action, processing, requires_capture,
   /// canceled, or succeeded.
-  PaymentIntentsStatus get status;
   @override
+  PaymentIntentsStatus get status;
 
   /// CONNECT ONLY
   /// The data with which to automatically create a Transfer when the payment
   /// is finalized. See the PaymentIntents use case for connected
   /// accounts for details.
+  @override
   @JsonKey(name: "transfer_data")
   dynamic get transferData;
-  @override
 
   /// CONNECT ONLY
   /// A string that identifies the resulting payment as part of a group.
   /// See the PaymentIntents use case for connected accounts for details.
+  @override
   @JsonKey(name: "transfer_group")
   dynamic get transferGroup;
+
+  /// Create a copy of PaymentIntent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_PaymentIntentCopyWith<_$_PaymentIntent> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PaymentIntentImplCopyWith<_$PaymentIntentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1617,8 +1649,12 @@ mixin _$PaymentIntentAmountDetails {
   /// Details about items included in the amount
   PaymentIntentTip? get tip => throw _privateConstructorUsedError;
 
+  /// Serializes this PaymentIntentAmountDetails to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PaymentIntentAmountDetails
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PaymentIntentAmountDetailsCopyWith<PaymentIntentAmountDetails>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1646,6 +1682,8 @@ class _$PaymentIntentAmountDetailsCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PaymentIntentAmountDetails
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1659,6 +1697,8 @@ class _$PaymentIntentAmountDetailsCopyWithImpl<$Res,
     ) as $Val);
   }
 
+  /// Create a copy of PaymentIntentAmountDetails
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PaymentIntentTipCopyWith<$Res>? get tip {
@@ -1673,12 +1713,12 @@ class _$PaymentIntentAmountDetailsCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PaymentIntentAmountDetailsCopyWith<$Res>
+abstract class _$$PaymentIntentAmountDetailsImplCopyWith<$Res>
     implements $PaymentIntentAmountDetailsCopyWith<$Res> {
-  factory _$$_PaymentIntentAmountDetailsCopyWith(
-          _$_PaymentIntentAmountDetails value,
-          $Res Function(_$_PaymentIntentAmountDetails) then) =
-      __$$_PaymentIntentAmountDetailsCopyWithImpl<$Res>;
+  factory _$$PaymentIntentAmountDetailsImplCopyWith(
+          _$PaymentIntentAmountDetailsImpl value,
+          $Res Function(_$PaymentIntentAmountDetailsImpl) then) =
+      __$$PaymentIntentAmountDetailsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({PaymentIntentTip? tip});
@@ -1688,21 +1728,23 @@ abstract class _$$_PaymentIntentAmountDetailsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PaymentIntentAmountDetailsCopyWithImpl<$Res>
+class __$$PaymentIntentAmountDetailsImplCopyWithImpl<$Res>
     extends _$PaymentIntentAmountDetailsCopyWithImpl<$Res,
-        _$_PaymentIntentAmountDetails>
-    implements _$$_PaymentIntentAmountDetailsCopyWith<$Res> {
-  __$$_PaymentIntentAmountDetailsCopyWithImpl(
-      _$_PaymentIntentAmountDetails _value,
-      $Res Function(_$_PaymentIntentAmountDetails) _then)
+        _$PaymentIntentAmountDetailsImpl>
+    implements _$$PaymentIntentAmountDetailsImplCopyWith<$Res> {
+  __$$PaymentIntentAmountDetailsImplCopyWithImpl(
+      _$PaymentIntentAmountDetailsImpl _value,
+      $Res Function(_$PaymentIntentAmountDetailsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PaymentIntentAmountDetails
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? tip = freezed,
   }) {
-    return _then(_$_PaymentIntentAmountDetails(
+    return _then(_$PaymentIntentAmountDetailsImpl(
       tip: freezed == tip
           ? _value.tip
           : tip // ignore: cast_nullable_to_non_nullable
@@ -1713,11 +1755,12 @@ class __$$_PaymentIntentAmountDetailsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PaymentIntentAmountDetails implements _PaymentIntentAmountDetails {
-  const _$_PaymentIntentAmountDetails({this.tip = const PaymentIntentTip()});
+class _$PaymentIntentAmountDetailsImpl implements _PaymentIntentAmountDetails {
+  const _$PaymentIntentAmountDetailsImpl({this.tip = const PaymentIntentTip()});
 
-  factory _$_PaymentIntentAmountDetails.fromJson(Map<String, dynamic> json) =>
-      _$$_PaymentIntentAmountDetailsFromJson(json);
+  factory _$PaymentIntentAmountDetailsImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$PaymentIntentAmountDetailsImplFromJson(json);
 
   /// Details about items included in the amount
   @override
@@ -1730,27 +1773,29 @@ class _$_PaymentIntentAmountDetails implements _PaymentIntentAmountDetails {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentIntentAmountDetails &&
+            other is _$PaymentIntentAmountDetailsImpl &&
             (identical(other.tip, tip) || other.tip == tip));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, tip);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PaymentIntentAmountDetails
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentIntentAmountDetailsCopyWith<_$_PaymentIntentAmountDetails>
-      get copyWith => __$$_PaymentIntentAmountDetailsCopyWithImpl<
-          _$_PaymentIntentAmountDetails>(this, _$identity);
+  _$$PaymentIntentAmountDetailsImplCopyWith<_$PaymentIntentAmountDetailsImpl>
+      get copyWith => __$$PaymentIntentAmountDetailsImplCopyWithImpl<
+          _$PaymentIntentAmountDetailsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PaymentIntentAmountDetailsToJson(
+    return _$$PaymentIntentAmountDetailsImplToJson(
       this,
     );
   }
@@ -1759,18 +1804,20 @@ class _$_PaymentIntentAmountDetails implements _PaymentIntentAmountDetails {
 abstract class _PaymentIntentAmountDetails
     implements PaymentIntentAmountDetails {
   const factory _PaymentIntentAmountDetails({final PaymentIntentTip? tip}) =
-      _$_PaymentIntentAmountDetails;
+      _$PaymentIntentAmountDetailsImpl;
 
   factory _PaymentIntentAmountDetails.fromJson(Map<String, dynamic> json) =
-      _$_PaymentIntentAmountDetails.fromJson;
-
-  @override
+      _$PaymentIntentAmountDetailsImpl.fromJson;
 
   /// Details about items included in the amount
-  PaymentIntentTip? get tip;
   @override
-  @JsonKey(ignore: true)
-  _$$_PaymentIntentAmountDetailsCopyWith<_$_PaymentIntentAmountDetails>
+  PaymentIntentTip? get tip;
+
+  /// Create a copy of PaymentIntentAmountDetails
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PaymentIntentAmountDetailsImplCopyWith<_$PaymentIntentAmountDetailsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1783,8 +1830,12 @@ mixin _$PaymentIntentTip {
   /// Portion of the amount that corresponds to a tip.
   int? get amount => throw _privateConstructorUsedError;
 
+  /// Serializes this PaymentIntentTip to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PaymentIntentTip
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PaymentIntentTipCopyWith<PaymentIntentTip> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1808,6 +1859,8 @@ class _$PaymentIntentTipCopyWithImpl<$Res, $Val extends PaymentIntentTip>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PaymentIntentTip
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1823,30 +1876,32 @@ class _$PaymentIntentTipCopyWithImpl<$Res, $Val extends PaymentIntentTip>
 }
 
 /// @nodoc
-abstract class _$$_PaymentIntentTipCopyWith<$Res>
+abstract class _$$PaymentIntentTipImplCopyWith<$Res>
     implements $PaymentIntentTipCopyWith<$Res> {
-  factory _$$_PaymentIntentTipCopyWith(
-          _$_PaymentIntentTip value, $Res Function(_$_PaymentIntentTip) then) =
-      __$$_PaymentIntentTipCopyWithImpl<$Res>;
+  factory _$$PaymentIntentTipImplCopyWith(_$PaymentIntentTipImpl value,
+          $Res Function(_$PaymentIntentTipImpl) then) =
+      __$$PaymentIntentTipImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? amount});
 }
 
 /// @nodoc
-class __$$_PaymentIntentTipCopyWithImpl<$Res>
-    extends _$PaymentIntentTipCopyWithImpl<$Res, _$_PaymentIntentTip>
-    implements _$$_PaymentIntentTipCopyWith<$Res> {
-  __$$_PaymentIntentTipCopyWithImpl(
-      _$_PaymentIntentTip _value, $Res Function(_$_PaymentIntentTip) _then)
+class __$$PaymentIntentTipImplCopyWithImpl<$Res>
+    extends _$PaymentIntentTipCopyWithImpl<$Res, _$PaymentIntentTipImpl>
+    implements _$$PaymentIntentTipImplCopyWith<$Res> {
+  __$$PaymentIntentTipImplCopyWithImpl(_$PaymentIntentTipImpl _value,
+      $Res Function(_$PaymentIntentTipImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PaymentIntentTip
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? amount = freezed,
   }) {
-    return _then(_$_PaymentIntentTip(
+    return _then(_$PaymentIntentTipImpl(
       amount: freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
@@ -1857,11 +1912,11 @@ class __$$_PaymentIntentTipCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PaymentIntentTip implements _PaymentIntentTip {
-  const _$_PaymentIntentTip({this.amount});
+class _$PaymentIntentTipImpl implements _PaymentIntentTip {
+  const _$PaymentIntentTipImpl({this.amount});
 
-  factory _$_PaymentIntentTip.fromJson(Map<String, dynamic> json) =>
-      _$$_PaymentIntentTipFromJson(json);
+  factory _$PaymentIntentTipImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PaymentIntentTipImplFromJson(json);
 
   /// Portion of the amount that corresponds to a tip.
   @override
@@ -1873,44 +1928,49 @@ class _$_PaymentIntentTip implements _PaymentIntentTip {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentIntentTip &&
+            other is _$PaymentIntentTipImpl &&
             (identical(other.amount, amount) || other.amount == amount));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, amount);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PaymentIntentTip
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentIntentTipCopyWith<_$_PaymentIntentTip> get copyWith =>
-      __$$_PaymentIntentTipCopyWithImpl<_$_PaymentIntentTip>(this, _$identity);
+  _$$PaymentIntentTipImplCopyWith<_$PaymentIntentTipImpl> get copyWith =>
+      __$$PaymentIntentTipImplCopyWithImpl<_$PaymentIntentTipImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PaymentIntentTipToJson(
+    return _$$PaymentIntentTipImplToJson(
       this,
     );
   }
 }
 
 abstract class _PaymentIntentTip implements PaymentIntentTip {
-  const factory _PaymentIntentTip({final int? amount}) = _$_PaymentIntentTip;
+  const factory _PaymentIntentTip({final int? amount}) = _$PaymentIntentTipImpl;
 
   factory _PaymentIntentTip.fromJson(Map<String, dynamic> json) =
-      _$_PaymentIntentTip.fromJson;
-
-  @override
+      _$PaymentIntentTipImpl.fromJson;
 
   /// Portion of the amount that corresponds to a tip.
-  int? get amount;
   @override
-  @JsonKey(ignore: true)
-  _$$_PaymentIntentTipCopyWith<_$_PaymentIntentTip> get copyWith =>
+  int? get amount;
+
+  /// Create a copy of PaymentIntentTip
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PaymentIntentTipImplCopyWith<_$PaymentIntentTipImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1924,8 +1984,12 @@ mixin _$PaymentIntentAutomaticPaymentMethods {
   /// Automatically calculates compatible payment methods
   bool? get enabled => throw _privateConstructorUsedError;
 
+  /// Serializes this PaymentIntentAutomaticPaymentMethods to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PaymentIntentAutomaticPaymentMethods
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PaymentIntentAutomaticPaymentMethodsCopyWith<
           PaymentIntentAutomaticPaymentMethods>
       get copyWith => throw _privateConstructorUsedError;
@@ -1953,6 +2017,8 @@ class _$PaymentIntentAutomaticPaymentMethodsCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PaymentIntentAutomaticPaymentMethods
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1968,33 +2034,35 @@ class _$PaymentIntentAutomaticPaymentMethodsCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PaymentIntentAutomaticPaymentMethodsCopyWith<$Res>
+abstract class _$$PaymentIntentAutomaticPaymentMethodsImplCopyWith<$Res>
     implements $PaymentIntentAutomaticPaymentMethodsCopyWith<$Res> {
-  factory _$$_PaymentIntentAutomaticPaymentMethodsCopyWith(
-          _$_PaymentIntentAutomaticPaymentMethods value,
-          $Res Function(_$_PaymentIntentAutomaticPaymentMethods) then) =
-      __$$_PaymentIntentAutomaticPaymentMethodsCopyWithImpl<$Res>;
+  factory _$$PaymentIntentAutomaticPaymentMethodsImplCopyWith(
+          _$PaymentIntentAutomaticPaymentMethodsImpl value,
+          $Res Function(_$PaymentIntentAutomaticPaymentMethodsImpl) then) =
+      __$$PaymentIntentAutomaticPaymentMethodsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool? enabled});
 }
 
 /// @nodoc
-class __$$_PaymentIntentAutomaticPaymentMethodsCopyWithImpl<$Res>
+class __$$PaymentIntentAutomaticPaymentMethodsImplCopyWithImpl<$Res>
     extends _$PaymentIntentAutomaticPaymentMethodsCopyWithImpl<$Res,
-        _$_PaymentIntentAutomaticPaymentMethods>
-    implements _$$_PaymentIntentAutomaticPaymentMethodsCopyWith<$Res> {
-  __$$_PaymentIntentAutomaticPaymentMethodsCopyWithImpl(
-      _$_PaymentIntentAutomaticPaymentMethods _value,
-      $Res Function(_$_PaymentIntentAutomaticPaymentMethods) _then)
+        _$PaymentIntentAutomaticPaymentMethodsImpl>
+    implements _$$PaymentIntentAutomaticPaymentMethodsImplCopyWith<$Res> {
+  __$$PaymentIntentAutomaticPaymentMethodsImplCopyWithImpl(
+      _$PaymentIntentAutomaticPaymentMethodsImpl _value,
+      $Res Function(_$PaymentIntentAutomaticPaymentMethodsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PaymentIntentAutomaticPaymentMethods
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? enabled = freezed,
   }) {
-    return _then(_$_PaymentIntentAutomaticPaymentMethods(
+    return _then(_$PaymentIntentAutomaticPaymentMethodsImpl(
       enabled: freezed == enabled
           ? _value.enabled
           : enabled // ignore: cast_nullable_to_non_nullable
@@ -2005,13 +2073,13 @@ class __$$_PaymentIntentAutomaticPaymentMethodsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PaymentIntentAutomaticPaymentMethods
+class _$PaymentIntentAutomaticPaymentMethodsImpl
     implements _PaymentIntentAutomaticPaymentMethods {
-  const _$_PaymentIntentAutomaticPaymentMethods({required this.enabled});
+  const _$PaymentIntentAutomaticPaymentMethodsImpl({required this.enabled});
 
-  factory _$_PaymentIntentAutomaticPaymentMethods.fromJson(
+  factory _$PaymentIntentAutomaticPaymentMethodsImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$_PaymentIntentAutomaticPaymentMethodsFromJson(json);
+      _$$PaymentIntentAutomaticPaymentMethodsImplFromJson(json);
 
   /// Automatically calculates compatible payment methods
   @override
@@ -2023,28 +2091,30 @@ class _$_PaymentIntentAutomaticPaymentMethods
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentIntentAutomaticPaymentMethods &&
+            other is _$PaymentIntentAutomaticPaymentMethodsImpl &&
             (identical(other.enabled, enabled) || other.enabled == enabled));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, enabled);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PaymentIntentAutomaticPaymentMethods
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentIntentAutomaticPaymentMethodsCopyWith<
-          _$_PaymentIntentAutomaticPaymentMethods>
-      get copyWith => __$$_PaymentIntentAutomaticPaymentMethodsCopyWithImpl<
-          _$_PaymentIntentAutomaticPaymentMethods>(this, _$identity);
+  _$$PaymentIntentAutomaticPaymentMethodsImplCopyWith<
+          _$PaymentIntentAutomaticPaymentMethodsImpl>
+      get copyWith => __$$PaymentIntentAutomaticPaymentMethodsImplCopyWithImpl<
+          _$PaymentIntentAutomaticPaymentMethodsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PaymentIntentAutomaticPaymentMethodsToJson(
+    return _$$PaymentIntentAutomaticPaymentMethodsImplToJson(
       this,
     );
   }
@@ -2053,19 +2123,22 @@ class _$_PaymentIntentAutomaticPaymentMethods
 abstract class _PaymentIntentAutomaticPaymentMethods
     implements PaymentIntentAutomaticPaymentMethods {
   const factory _PaymentIntentAutomaticPaymentMethods(
-      {required final bool? enabled}) = _$_PaymentIntentAutomaticPaymentMethods;
+          {required final bool? enabled}) =
+      _$PaymentIntentAutomaticPaymentMethodsImpl;
 
   factory _PaymentIntentAutomaticPaymentMethods.fromJson(
           Map<String, dynamic> json) =
-      _$_PaymentIntentAutomaticPaymentMethods.fromJson;
-
-  @override
+      _$PaymentIntentAutomaticPaymentMethodsImpl.fromJson;
 
   /// Automatically calculates compatible payment methods
-  bool? get enabled;
   @override
-  @JsonKey(ignore: true)
-  _$$_PaymentIntentAutomaticPaymentMethodsCopyWith<
-          _$_PaymentIntentAutomaticPaymentMethods>
+  bool? get enabled;
+
+  /// Create a copy of PaymentIntentAutomaticPaymentMethods
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PaymentIntentAutomaticPaymentMethodsImplCopyWith<
+          _$PaymentIntentAutomaticPaymentMethodsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

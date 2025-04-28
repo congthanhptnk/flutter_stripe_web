@@ -1,3 +1,50 @@
+## 6.3.0
+**Features**
+- Add support for any kind of payment method in setup intent with [confirmSetup]
+
+## 6.2.0
+**Features**
+- Add basic support for Expresscheckout on the web
+
+**Fixes** 
+- Export elementappearance and element theme
+
+## 6.1.0
+- Sync with Stripe [0.38.6](https://github.com/stripe/stripe-react-native/releases/tag/v0.38.6). 
+- Minor fixes and improvements.
+- Fix parameters for webelement
+
+## 6.0.0
+**Breaking changes**
+- Converted the library to the new js interop so this library can be compiled to WASM.
+- This library requires Dart sdk 3.3.0 and higher.
+
+**Features**
+- Payment element add support for Apple pay elements.
+- Payment element add support for payment method order
+
+## 6.0.0
+**Breaking changes**
+- Converted the library to the new js interop so this library can be compiled to WASM.
+- This requires Dart sdk 3.3.0 and higher.
+
+**Features**
+- Payment element add support for Apple pay elements.
+- Payment element add support for payment method order
+
+## 5.1.0
+
+**Features**
+- #1122 Add google pay and apple pay for web
+- Sync with Stripe [0.37.0](https://github.com/stripe/stripe-react-native/releases/tag/v0.37.0)
+- #1606 Enable tap to pay
+
+**Fixes**
+- #1637 Cash app pay causes crash on web.
+- #1608 prevent paymentintent crash.
+- #1465 unknow result.
+- #1512 add latest charge field to payment intent (Web only).
+
 ## 5.0.0
 
 **Breaking changes**

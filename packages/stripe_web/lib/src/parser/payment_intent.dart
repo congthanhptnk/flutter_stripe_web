@@ -1,5 +1,5 @@
-import 'package:stripe_platform_interface/stripe_platform_interface.dart';
 import 'package:stripe_js/stripe_api.dart' as js;
+import 'package:stripe_platform_interface/stripe_platform_interface.dart';
 
 extension PaymentIntentExtension on js.PaymentIntent {
   PaymentIntent parse() {
@@ -14,8 +14,7 @@ extension PaymentIntentExtension on js.PaymentIntent {
       latestCharge: latestCharge,
       //paymentMethodId: payment_method,
       captureMethod: CaptureMethodExtension.parse(captureMethod.name),
-      confirmationMethod:
-          ConfirmationMethodExtension.parse(confirmationMethod.name),
+      confirmationMethod: ConfirmationMethodExtension.parse(confirmationMethod.name),
 //
       description: description,
       // receiptEmail: receipt_email,
@@ -74,6 +73,10 @@ extension CaptureMethodExtension on CaptureMethod {
       case 'Automatic':
       case 'automatic':
         return CaptureMethod.Automatic;
+      case 'AutomaticAsync':
+      case 'automaticAsync':
+      case 'automatic_async':
+        return CaptureMethod.AutomaticAsync;
       case 'Manual':
       case 'manual':
         return CaptureMethod.Manual;

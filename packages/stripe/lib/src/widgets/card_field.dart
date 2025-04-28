@@ -14,7 +14,7 @@ import 'keep_visible_on_focus.dart';
 class CardField extends StatefulWidget {
   const CardField({
     this.onCardChanged,
-    Key? key,
+    super.key,
     this.onFocus,
     this.decoration,
     this.enablePostalCode = false,
@@ -31,9 +31,10 @@ class CardField extends StatefulWidget {
     this.postalCodeHintText,
     this.controller,
     this.preferredNetworks,
+    this.onBehalfOf,
     this.androidPlatformViewRenderType =
         AndroidPlatformViewRenderType.expensiveAndroidView,
-  }) : super(key: key);
+  });
 
   /// Decoration related to the input fields.
   final InputDecoration? decoration;
@@ -49,6 +50,9 @@ class CardField extends StatefulWidget {
 
   /// Color of the cursor when a field gets focus.
   final Color? cursorColor;
+
+  /// The account (if any) for which the funds of the intent are intended.
+  final String? onBehalfOf;
 
   /// Whether or not to show the postalcode field in the form.
   ///
@@ -197,6 +201,7 @@ class _CardFieldState extends State<CardField> {
               focusNode: _node,
               style: style,
               placeholder: placeholder,
+              onBehalfOf: widget.onBehalfOf,
               enablePostalCode: widget.enablePostalCode,
               countryCode: widget.countryCode,
               dangerouslyGetFullCardDetails:
@@ -282,7 +287,6 @@ class _MethodChannelCardField extends StatefulWidget {
     this.onCardChanged,
     required this.controller,
     required this.androidPlatformViewRenderType,
-    Key? key,
     this.onFocus,
     this.style,
     this.placeholder,
@@ -296,13 +300,13 @@ class _MethodChannelCardField extends StatefulWidget {
     this.preferredNetworks,
     this.dangerouslyGetFullCardDetails = false,
     this.dangerouslyUpdateFullCardDetails = false,
+    this.onBehalfOf,
     this.autofocus = false,
   })  : assert(constraints == null || constraints.debugAssertIsValid()),
         constraints = (width != null || height != null)
             ? constraints?.tighten(width: width, height: height) ??
                 BoxConstraints.tightFor(width: width, height: height)
-            : constraints,
-        super(key: key);
+            : constraints;
 
   final BoxConstraints? constraints;
   final CardFocusCallback? onFocus;
@@ -319,6 +323,7 @@ class _MethodChannelCardField extends StatefulWidget {
   final bool dangerouslyUpdateFullCardDetails;
   final AndroidPlatformViewRenderType androidPlatformViewRenderType;
   final List<CardBrand>? preferredNetworks;
+  final String? onBehalfOf;
 
   // This is used in the platform side to register the view.
   static const _viewType = 'flutter.stripe/card_field';
@@ -407,8 +412,10 @@ class _MethodChannelCardFieldState extends State<_MethodChannelCardField>
       'placeholder': placeholder.toJson(),
       'postalCodeEnabled': widget.enablePostalCode,
       'countryCode': widget.countryCode,
-      'preferredNetworks':
-          widget.preferredNetworks?.map((e) => e.brandValue).toList(),
+      if (widget.onBehalfOf != null) 'onBehalfOf': widget.onBehalfOf,
+      if (widget.preferredNetworks != null)
+        'preferredNetworks':
+            widget.preferredNetworks?.map((e) => e.brandValue).toList(),
       'dangerouslyGetFullCardDetails': widget.dangerouslyGetFullCardDetails,
       if (widget.dangerouslyUpdateFullCardDetails &&
           controller.initalDetails != null)
@@ -612,12 +619,12 @@ class _MethodChannelCardFieldState extends State<_MethodChannelCardField>
 
 class _AndroidCardField extends StatelessWidget {
   const _AndroidCardField({
-    Key? key,
     required this.viewType,
     required this.creationParams,
     required this.onPlatformViewCreated,
     required this.androidPlatformViewRenderType,
-  }) : super(key: key);
+    super.key,
+  });
 
   final AndroidPlatformViewRenderType androidPlatformViewRenderType;
   final String viewType;
@@ -672,11 +679,11 @@ class _AndroidCardField extends StatelessWidget {
 
 class _UiKitCardField extends StatelessWidget {
   const _UiKitCardField({
-    Key? key,
     required this.viewType,
     required this.creationParams,
     required this.onPlatformViewCreated,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String viewType;
   final Map<String, dynamic> creationParams;

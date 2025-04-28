@@ -12,7 +12,7 @@ part of 'error.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 StripeError _$StripeErrorFromJson(Map<String, dynamic> json) {
   return _PaymentElementChangeEvent.fromJson(json);
@@ -41,8 +41,12 @@ mixin _$StripeError {
   /// field.
   String? get param => throw _privateConstructorUsedError;
 
+  /// Serializes this StripeError to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of StripeError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $StripeErrorCopyWith<StripeError> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -71,6 +75,8 @@ class _$StripeErrorCopyWithImpl<$Res, $Val extends StripeError>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of StripeError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -106,12 +112,12 @@ class _$StripeErrorCopyWithImpl<$Res, $Val extends StripeError>
 }
 
 /// @nodoc
-abstract class _$$_PaymentElementChangeEventCopyWith<$Res>
+abstract class _$$PaymentElementChangeEventImplCopyWith<$Res>
     implements $StripeErrorCopyWith<$Res> {
-  factory _$$_PaymentElementChangeEventCopyWith(
-          _$_PaymentElementChangeEvent value,
-          $Res Function(_$_PaymentElementChangeEvent) then) =
-      __$$_PaymentElementChangeEventCopyWithImpl<$Res>;
+  factory _$$PaymentElementChangeEventImplCopyWith(
+          _$PaymentElementChangeEventImpl value,
+          $Res Function(_$PaymentElementChangeEventImpl) then) =
+      __$$PaymentElementChangeEventImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -123,14 +129,16 @@ abstract class _$$_PaymentElementChangeEventCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PaymentElementChangeEventCopyWithImpl<$Res>
-    extends _$StripeErrorCopyWithImpl<$Res, _$_PaymentElementChangeEvent>
-    implements _$$_PaymentElementChangeEventCopyWith<$Res> {
-  __$$_PaymentElementChangeEventCopyWithImpl(
-      _$_PaymentElementChangeEvent _value,
-      $Res Function(_$_PaymentElementChangeEvent) _then)
+class __$$PaymentElementChangeEventImplCopyWithImpl<$Res>
+    extends _$StripeErrorCopyWithImpl<$Res, _$PaymentElementChangeEventImpl>
+    implements _$$PaymentElementChangeEventImplCopyWith<$Res> {
+  __$$PaymentElementChangeEventImplCopyWithImpl(
+      _$PaymentElementChangeEventImpl _value,
+      $Res Function(_$PaymentElementChangeEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of StripeError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -140,7 +148,7 @@ class __$$_PaymentElementChangeEventCopyWithImpl<$Res>
     Object? message = freezed,
     Object? param = freezed,
   }) {
-    return _then(_$_PaymentElementChangeEvent(
+    return _then(_$PaymentElementChangeEventImpl(
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -167,12 +175,12 @@ class __$$_PaymentElementChangeEventCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PaymentElementChangeEvent implements _PaymentElementChangeEvent {
-  const _$_PaymentElementChangeEvent(
+class _$PaymentElementChangeEventImpl implements _PaymentElementChangeEvent {
+  const _$PaymentElementChangeEventImpl(
       {this.type, this.code, this.decline_code, this.message, this.param});
 
-  factory _$_PaymentElementChangeEvent.fromJson(Map<String, dynamic> json) =>
-      _$$_PaymentElementChangeEventFromJson(json);
+  factory _$PaymentElementChangeEventImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PaymentElementChangeEventImplFromJson(json);
 
   /// The type of error returned. One of api_error, card_error,
   /// idempotency_error, or invalid_request_error
@@ -206,10 +214,10 @@ class _$_PaymentElementChangeEvent implements _PaymentElementChangeEvent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentElementChangeEvent &&
+            other is _$PaymentElementChangeEventImpl &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.decline_code, decline_code) ||
@@ -218,21 +226,23 @@ class _$_PaymentElementChangeEvent implements _PaymentElementChangeEvent {
             (identical(other.param, param) || other.param == param));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, type, code, decline_code, message, param);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of StripeError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentElementChangeEventCopyWith<_$_PaymentElementChangeEvent>
-      get copyWith => __$$_PaymentElementChangeEventCopyWithImpl<
-          _$_PaymentElementChangeEvent>(this, _$identity);
+  _$$PaymentElementChangeEventImplCopyWith<_$PaymentElementChangeEventImpl>
+      get copyWith => __$$PaymentElementChangeEventImplCopyWithImpl<
+          _$PaymentElementChangeEventImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PaymentElementChangeEventToJson(
+    return _$$PaymentElementChangeEventImplToJson(
       this,
     );
   }
@@ -244,39 +254,41 @@ abstract class _PaymentElementChangeEvent implements StripeError {
       final String? code,
       final String? decline_code,
       final String? message,
-      final String? param}) = _$_PaymentElementChangeEvent;
+      final String? param}) = _$PaymentElementChangeEventImpl;
 
   factory _PaymentElementChangeEvent.fromJson(Map<String, dynamic> json) =
-      _$_PaymentElementChangeEvent.fromJson;
-
-  @override
+      _$PaymentElementChangeEventImpl.fromJson;
 
   /// The type of error returned. One of api_error, card_error,
   /// idempotency_error, or invalid_request_error
-  String? get type;
   @override
+  String? get type;
 
   /// For some errors that could be handled programmatically,
   /// a short string indicating the error code reported.
-  String? get code;
   @override
+  String? get code;
 
   /// For card errors resulting from a card issuer decline, a short string
   /// indicating the card issuer’s reason for the decline if they provide one.
-  String? get decline_code;
   @override
+  String? get decline_code;
 
   /// A human-readable message providing more details about the error.
   /// For card errors, these messages can be shown to your users.
-  String? get message;
   @override
+  String? get message;
 
   /// If the error is parameter-specific, the parameter related to the error.
   /// For example, you can use this to display a message near the correct form
   /// field.
-  String? get param;
   @override
-  @JsonKey(ignore: true)
-  _$$_PaymentElementChangeEventCopyWith<_$_PaymentElementChangeEvent>
+  String? get param;
+
+  /// Create a copy of StripeError
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PaymentElementChangeEventImplCopyWith<_$PaymentElementChangeEventImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'create_token_bank_account_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 CreateTokenBankAccountData _$CreateTokenBankAccountDataFromJson(
     Map<String, dynamic> json) {
@@ -37,8 +37,12 @@ mixin _$CreateTokenBankAccountData {
   @JsonKey(name: "account_type")
   String? get accountType => throw _privateConstructorUsedError;
 
+  /// Serializes this CreateTokenBankAccountData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CreateTokenBankAccountData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CreateTokenBankAccountDataCopyWith<CreateTokenBankAccountData>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -72,6 +76,8 @@ class _$CreateTokenBankAccountDataCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CreateTokenBankAccountData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -117,12 +123,12 @@ class _$CreateTokenBankAccountDataCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_CreateTokenBankAccountDataCopyWith<$Res>
+abstract class _$$CreateTokenBankAccountDataImplCopyWith<$Res>
     implements $CreateTokenBankAccountDataCopyWith<$Res> {
-  factory _$$_CreateTokenBankAccountDataCopyWith(
-          _$_CreateTokenBankAccountData value,
-          $Res Function(_$_CreateTokenBankAccountData) then) =
-      __$$_CreateTokenBankAccountDataCopyWithImpl<$Res>;
+  factory _$$CreateTokenBankAccountDataImplCopyWith(
+          _$CreateTokenBankAccountDataImpl value,
+          $Res Function(_$CreateTokenBankAccountDataImpl) then) =
+      __$$CreateTokenBankAccountDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -137,15 +143,17 @@ abstract class _$$_CreateTokenBankAccountDataCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CreateTokenBankAccountDataCopyWithImpl<$Res>
+class __$$CreateTokenBankAccountDataImplCopyWithImpl<$Res>
     extends _$CreateTokenBankAccountDataCopyWithImpl<$Res,
-        _$_CreateTokenBankAccountData>
-    implements _$$_CreateTokenBankAccountDataCopyWith<$Res> {
-  __$$_CreateTokenBankAccountDataCopyWithImpl(
-      _$_CreateTokenBankAccountData _value,
-      $Res Function(_$_CreateTokenBankAccountData) _then)
+        _$CreateTokenBankAccountDataImpl>
+    implements _$$CreateTokenBankAccountDataImplCopyWith<$Res> {
+  __$$CreateTokenBankAccountDataImplCopyWithImpl(
+      _$CreateTokenBankAccountDataImpl _value,
+      $Res Function(_$CreateTokenBankAccountDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CreateTokenBankAccountData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -157,7 +165,7 @@ class __$$_CreateTokenBankAccountDataCopyWithImpl<$Res>
     Object? accountHolderType = freezed,
     Object? accountType = freezed,
   }) {
-    return _then(_$_CreateTokenBankAccountData(
+    return _then(_$CreateTokenBankAccountDataImpl(
       country: null == country
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
@@ -192,8 +200,8 @@ class __$$_CreateTokenBankAccountDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CreateTokenBankAccountData implements _CreateTokenBankAccountData {
-  const _$_CreateTokenBankAccountData(
+class _$CreateTokenBankAccountDataImpl implements _CreateTokenBankAccountData {
+  const _$CreateTokenBankAccountDataImpl(
       {required this.country,
       required this.currency,
       @JsonKey(name: "routing_number") this.routingNumber,
@@ -202,8 +210,9 @@ class _$_CreateTokenBankAccountData implements _CreateTokenBankAccountData {
       @JsonKey(name: "account_holder_type") this.accountHolderType,
       @JsonKey(name: "account_type") this.accountType});
 
-  factory _$_CreateTokenBankAccountData.fromJson(Map<String, dynamic> json) =>
-      _$$_CreateTokenBankAccountDataFromJson(json);
+  factory _$CreateTokenBankAccountDataImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$CreateTokenBankAccountDataImplFromJson(json);
 
   @override
   final String country;
@@ -233,10 +242,10 @@ class _$_CreateTokenBankAccountData implements _CreateTokenBankAccountData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CreateTokenBankAccountData &&
+            other is _$CreateTokenBankAccountDataImpl &&
             (identical(other.country, country) || other.country == country) &&
             (identical(other.currency, currency) ||
                 other.currency == currency) &&
@@ -252,21 +261,23 @@ class _$_CreateTokenBankAccountData implements _CreateTokenBankAccountData {
                 other.accountType == accountType));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, country, currency, routingNumber,
       accountNumber, accountHolderName, accountHolderType, accountType);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CreateTokenBankAccountData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CreateTokenBankAccountDataCopyWith<_$_CreateTokenBankAccountData>
-      get copyWith => __$$_CreateTokenBankAccountDataCopyWithImpl<
-          _$_CreateTokenBankAccountData>(this, _$identity);
+  _$$CreateTokenBankAccountDataImplCopyWith<_$CreateTokenBankAccountDataImpl>
+      get copyWith => __$$CreateTokenBankAccountDataImplCopyWithImpl<
+          _$CreateTokenBankAccountDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CreateTokenBankAccountDataToJson(
+    return _$$CreateTokenBankAccountDataImplToJson(
       this,
     );
   }
@@ -283,16 +294,16 @@ abstract class _CreateTokenBankAccountData
           @JsonKey(name: "account_holder_type")
           final BankAccountHolderType? accountHolderType,
           @JsonKey(name: "account_type") final String? accountType}) =
-      _$_CreateTokenBankAccountData;
+      _$CreateTokenBankAccountDataImpl;
 
   factory _CreateTokenBankAccountData.fromJson(Map<String, dynamic> json) =
-      _$_CreateTokenBankAccountData.fromJson;
+      _$CreateTokenBankAccountDataImpl.fromJson;
 
   @override
   String get country;
-  @override
 
   /// Three character currency code (e.g., usd).
+  @override
   String get currency;
   @override
   @JsonKey(name: "routing_number")
@@ -309,8 +320,11 @@ abstract class _CreateTokenBankAccountData
   @override
   @JsonKey(name: "account_type")
   String? get accountType;
+
+  /// Create a copy of CreateTokenBankAccountData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_CreateTokenBankAccountDataCopyWith<_$_CreateTokenBankAccountData>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CreateTokenBankAccountDataImplCopyWith<_$CreateTokenBankAccountDataImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

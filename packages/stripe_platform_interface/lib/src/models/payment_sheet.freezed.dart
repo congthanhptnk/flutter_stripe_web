@@ -38,6 +38,10 @@ mixin _$SetupPaymentSheetParameters {
   ///A temp key can be used for API operations that require a secret key.
   String? get customerEphemeralKeySecret => throw _privateConstructorUsedError;
 
+  /// (Experimental) This parameter can be changed or removed at any time (use at your own risk).
+  /// The client secret of this Customer Session. Used on the client to set up secure access to the given customer.
+  String? get customerSessionClientSecret => throw _privateConstructorUsedError;
+
   /// Secret used for client-side retrieval using a publishable key.
   ///
   /// If this value is null make sure to add a [setupIntentClientSecret]
@@ -89,6 +93,19 @@ mixin _$SetupPaymentSheetParameters {
   @JsonKey(name: 'defaultBillingDetails')
   BillingDetails? get billingDetails => throw _privateConstructorUsedError;
 
+  ///This is an experimental feature that may be removed at any time.
+  /// Defaults to true. If true, the customer can delete all saved payment methods.
+  /// If false, the customer can't delete if they only have one saved payment method remaining.
+  bool? get allowsRemovalOfLastSavedPaymentMethod =>
+      throw _privateConstructorUsedError;
+
+  /// By default, PaymentSheet will use a dynamic ordering that optimizes payment method display for the customer.
+  /// You can override the default order in which payment methods are displayed in PaymentSheet with a list of payment method types.
+  /// See https://stripe.com/docs/api/payment_methods/object#payment_method_object-type for the list of valid types.  You may also pass external payment methods.
+  /// Example: ["card", "external_paypal", "klarna"]
+  /// If you omit payment methods from this list, they’ll be automatically ordered by Stripe after the ones you provide. Invalid payment methods are ignored.
+  List<String>? get paymentMethodOrder => throw _privateConstructorUsedError;
+
   /// Return URL is required for IDEAL, Klarna and few other payment methods
   String? get returnURL => throw _privateConstructorUsedError;
 
@@ -125,6 +142,7 @@ abstract class $SetupPaymentSheetParametersCopyWith<$Res> {
       String? customerId,
       String? primaryButtonLabel,
       String? customerEphemeralKeySecret,
+      String? customerSessionClientSecret,
       String? paymentIntentClientSecret,
       String? setupIntentClientSecret,
       IntentConfiguration? intentConfiguration,
@@ -135,6 +153,8 @@ abstract class $SetupPaymentSheetParametersCopyWith<$Res> {
       bool allowsDelayedPaymentMethods,
       PaymentSheetAppearance? appearance,
       @JsonKey(name: 'defaultBillingDetails') BillingDetails? billingDetails,
+      bool? allowsRemovalOfLastSavedPaymentMethod,
+      List<String>? paymentMethodOrder,
       String? returnURL,
       BillingDetailsCollectionConfiguration?
           billingDetailsCollectionConfiguration,
@@ -169,6 +189,7 @@ class _$SetupPaymentSheetParametersCopyWithImpl<$Res,
     Object? customerId = freezed,
     Object? primaryButtonLabel = freezed,
     Object? customerEphemeralKeySecret = freezed,
+    Object? customerSessionClientSecret = freezed,
     Object? paymentIntentClientSecret = freezed,
     Object? setupIntentClientSecret = freezed,
     Object? intentConfiguration = freezed,
@@ -179,6 +200,8 @@ class _$SetupPaymentSheetParametersCopyWithImpl<$Res,
     Object? allowsDelayedPaymentMethods = null,
     Object? appearance = freezed,
     Object? billingDetails = freezed,
+    Object? allowsRemovalOfLastSavedPaymentMethod = freezed,
+    Object? paymentMethodOrder = freezed,
     Object? returnURL = freezed,
     Object? billingDetailsCollectionConfiguration = freezed,
     Object? removeSavedPaymentMethodMessage = freezed,
@@ -200,6 +223,10 @@ class _$SetupPaymentSheetParametersCopyWithImpl<$Res,
       customerEphemeralKeySecret: freezed == customerEphemeralKeySecret
           ? _value.customerEphemeralKeySecret
           : customerEphemeralKeySecret // ignore: cast_nullable_to_non_nullable
+              as String?,
+      customerSessionClientSecret: freezed == customerSessionClientSecret
+          ? _value.customerSessionClientSecret
+          : customerSessionClientSecret // ignore: cast_nullable_to_non_nullable
               as String?,
       paymentIntentClientSecret: freezed == paymentIntentClientSecret
           ? _value.paymentIntentClientSecret
@@ -241,6 +268,15 @@ class _$SetupPaymentSheetParametersCopyWithImpl<$Res,
           ? _value.billingDetails
           : billingDetails // ignore: cast_nullable_to_non_nullable
               as BillingDetails?,
+      allowsRemovalOfLastSavedPaymentMethod: freezed ==
+              allowsRemovalOfLastSavedPaymentMethod
+          ? _value.allowsRemovalOfLastSavedPaymentMethod
+          : allowsRemovalOfLastSavedPaymentMethod // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      paymentMethodOrder: freezed == paymentMethodOrder
+          ? _value.paymentMethodOrder
+          : paymentMethodOrder // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       returnURL: freezed == returnURL
           ? _value.returnURL
           : returnURL // ignore: cast_nullable_to_non_nullable
@@ -352,6 +388,7 @@ abstract class _$$SetupParametersImplCopyWith<$Res>
       String? customerId,
       String? primaryButtonLabel,
       String? customerEphemeralKeySecret,
+      String? customerSessionClientSecret,
       String? paymentIntentClientSecret,
       String? setupIntentClientSecret,
       IntentConfiguration? intentConfiguration,
@@ -362,6 +399,8 @@ abstract class _$$SetupParametersImplCopyWith<$Res>
       bool allowsDelayedPaymentMethods,
       PaymentSheetAppearance? appearance,
       @JsonKey(name: 'defaultBillingDetails') BillingDetails? billingDetails,
+      bool? allowsRemovalOfLastSavedPaymentMethod,
+      List<String>? paymentMethodOrder,
       String? returnURL,
       BillingDetailsCollectionConfiguration?
           billingDetailsCollectionConfiguration,
@@ -399,6 +438,7 @@ class __$$SetupParametersImplCopyWithImpl<$Res>
     Object? customerId = freezed,
     Object? primaryButtonLabel = freezed,
     Object? customerEphemeralKeySecret = freezed,
+    Object? customerSessionClientSecret = freezed,
     Object? paymentIntentClientSecret = freezed,
     Object? setupIntentClientSecret = freezed,
     Object? intentConfiguration = freezed,
@@ -409,6 +449,8 @@ class __$$SetupParametersImplCopyWithImpl<$Res>
     Object? allowsDelayedPaymentMethods = null,
     Object? appearance = freezed,
     Object? billingDetails = freezed,
+    Object? allowsRemovalOfLastSavedPaymentMethod = freezed,
+    Object? paymentMethodOrder = freezed,
     Object? returnURL = freezed,
     Object? billingDetailsCollectionConfiguration = freezed,
     Object? removeSavedPaymentMethodMessage = freezed,
@@ -430,6 +472,10 @@ class __$$SetupParametersImplCopyWithImpl<$Res>
       customerEphemeralKeySecret: freezed == customerEphemeralKeySecret
           ? _value.customerEphemeralKeySecret
           : customerEphemeralKeySecret // ignore: cast_nullable_to_non_nullable
+              as String?,
+      customerSessionClientSecret: freezed == customerSessionClientSecret
+          ? _value.customerSessionClientSecret
+          : customerSessionClientSecret // ignore: cast_nullable_to_non_nullable
               as String?,
       paymentIntentClientSecret: freezed == paymentIntentClientSecret
           ? _value.paymentIntentClientSecret
@@ -471,6 +517,15 @@ class __$$SetupParametersImplCopyWithImpl<$Res>
           ? _value.billingDetails
           : billingDetails // ignore: cast_nullable_to_non_nullable
               as BillingDetails?,
+      allowsRemovalOfLastSavedPaymentMethod: freezed ==
+              allowsRemovalOfLastSavedPaymentMethod
+          ? _value.allowsRemovalOfLastSavedPaymentMethod
+          : allowsRemovalOfLastSavedPaymentMethod // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      paymentMethodOrder: freezed == paymentMethodOrder
+          ? _value._paymentMethodOrder
+          : paymentMethodOrder // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       returnURL: freezed == returnURL
           ? _value.returnURL
           : returnURL // ignore: cast_nullable_to_non_nullable
@@ -502,6 +557,7 @@ class _$SetupParametersImpl implements _SetupParameters {
       this.customerId,
       this.primaryButtonLabel,
       this.customerEphemeralKeySecret,
+      this.customerSessionClientSecret,
       this.paymentIntentClientSecret,
       this.setupIntentClientSecret,
       this.intentConfiguration,
@@ -512,12 +568,15 @@ class _$SetupParametersImpl implements _SetupParameters {
       this.allowsDelayedPaymentMethods = false,
       this.appearance,
       @JsonKey(name: 'defaultBillingDetails') this.billingDetails,
+      this.allowsRemovalOfLastSavedPaymentMethod,
+      final List<String>? paymentMethodOrder,
       this.returnURL,
       this.billingDetailsCollectionConfiguration,
       this.removeSavedPaymentMethodMessage,
       @JsonKey(toJson: _cardBrandListToJson)
       final List<CardBrand>? preferredNetworks})
-      : _preferredNetworks = preferredNetworks;
+      : _paymentMethodOrder = paymentMethodOrder,
+        _preferredNetworks = preferredNetworks;
 
   factory _$SetupParametersImpl.fromJson(Map<String, dynamic> json) =>
       _$$SetupParametersImplFromJson(json);
@@ -543,6 +602,11 @@ class _$SetupParametersImpl implements _SetupParameters {
   ///A temp key can be used for API operations that require a secret key.
   @override
   final String? customerEphemeralKeySecret;
+
+  /// (Experimental) This parameter can be changed or removed at any time (use at your own risk).
+  /// The client secret of this Customer Session. Used on the client to set up secure access to the given customer.
+  @override
+  final String? customerSessionClientSecret;
 
   /// Secret used for client-side retrieval using a publishable key.
   ///
@@ -605,6 +669,34 @@ class _$SetupParametersImpl implements _SetupParameters {
   @JsonKey(name: 'defaultBillingDetails')
   final BillingDetails? billingDetails;
 
+  ///This is an experimental feature that may be removed at any time.
+  /// Defaults to true. If true, the customer can delete all saved payment methods.
+  /// If false, the customer can't delete if they only have one saved payment method remaining.
+  @override
+  final bool? allowsRemovalOfLastSavedPaymentMethod;
+
+  /// By default, PaymentSheet will use a dynamic ordering that optimizes payment method display for the customer.
+  /// You can override the default order in which payment methods are displayed in PaymentSheet with a list of payment method types.
+  /// See https://stripe.com/docs/api/payment_methods/object#payment_method_object-type for the list of valid types.  You may also pass external payment methods.
+  /// Example: ["card", "external_paypal", "klarna"]
+  /// If you omit payment methods from this list, they’ll be automatically ordered by Stripe after the ones you provide. Invalid payment methods are ignored.
+  final List<String>? _paymentMethodOrder;
+
+  /// By default, PaymentSheet will use a dynamic ordering that optimizes payment method display for the customer.
+  /// You can override the default order in which payment methods are displayed in PaymentSheet with a list of payment method types.
+  /// See https://stripe.com/docs/api/payment_methods/object#payment_method_object-type for the list of valid types.  You may also pass external payment methods.
+  /// Example: ["card", "external_paypal", "klarna"]
+  /// If you omit payment methods from this list, they’ll be automatically ordered by Stripe after the ones you provide. Invalid payment methods are ignored.
+  @override
+  List<String>? get paymentMethodOrder {
+    final value = _paymentMethodOrder;
+    if (value == null) return null;
+    if (_paymentMethodOrder is EqualUnmodifiableListView)
+      return _paymentMethodOrder;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   /// Return URL is required for IDEAL, Klarna and few other payment methods
   @override
   final String? returnURL;
@@ -637,7 +729,7 @@ class _$SetupParametersImpl implements _SetupParameters {
 
   @override
   String toString() {
-    return 'SetupPaymentSheetParameters(customFlow: $customFlow, customerId: $customerId, primaryButtonLabel: $primaryButtonLabel, customerEphemeralKeySecret: $customerEphemeralKeySecret, paymentIntentClientSecret: $paymentIntentClientSecret, setupIntentClientSecret: $setupIntentClientSecret, intentConfiguration: $intentConfiguration, merchantDisplayName: $merchantDisplayName, applePay: $applePay, style: $style, googlePay: $googlePay, allowsDelayedPaymentMethods: $allowsDelayedPaymentMethods, appearance: $appearance, billingDetails: $billingDetails, returnURL: $returnURL, billingDetailsCollectionConfiguration: $billingDetailsCollectionConfiguration, removeSavedPaymentMethodMessage: $removeSavedPaymentMethodMessage, preferredNetworks: $preferredNetworks)';
+    return 'SetupPaymentSheetParameters(customFlow: $customFlow, customerId: $customerId, primaryButtonLabel: $primaryButtonLabel, customerEphemeralKeySecret: $customerEphemeralKeySecret, customerSessionClientSecret: $customerSessionClientSecret, paymentIntentClientSecret: $paymentIntentClientSecret, setupIntentClientSecret: $setupIntentClientSecret, intentConfiguration: $intentConfiguration, merchantDisplayName: $merchantDisplayName, applePay: $applePay, style: $style, googlePay: $googlePay, allowsDelayedPaymentMethods: $allowsDelayedPaymentMethods, appearance: $appearance, billingDetails: $billingDetails, allowsRemovalOfLastSavedPaymentMethod: $allowsRemovalOfLastSavedPaymentMethod, paymentMethodOrder: $paymentMethodOrder, returnURL: $returnURL, billingDetailsCollectionConfiguration: $billingDetailsCollectionConfiguration, removeSavedPaymentMethodMessage: $removeSavedPaymentMethodMessage, preferredNetworks: $preferredNetworks)';
   }
 
   @override
@@ -654,6 +746,9 @@ class _$SetupParametersImpl implements _SetupParameters {
             (identical(other.customerEphemeralKeySecret, customerEphemeralKeySecret) ||
                 other.customerEphemeralKeySecret ==
                     customerEphemeralKeySecret) &&
+            (identical(other.customerSessionClientSecret, customerSessionClientSecret) ||
+                other.customerSessionClientSecret ==
+                    customerSessionClientSecret) &&
             (identical(other.paymentIntentClientSecret, paymentIntentClientSecret) ||
                 other.paymentIntentClientSecret == paymentIntentClientSecret) &&
             (identical(other.setupIntentClientSecret, setupIntentClientSecret) ||
@@ -674,41 +769,46 @@ class _$SetupParametersImpl implements _SetupParameters {
                 other.appearance == appearance) &&
             (identical(other.billingDetails, billingDetails) ||
                 other.billingDetails == billingDetails) &&
+            (identical(other.allowsRemovalOfLastSavedPaymentMethod, allowsRemovalOfLastSavedPaymentMethod) ||
+                other.allowsRemovalOfLastSavedPaymentMethod ==
+                    allowsRemovalOfLastSavedPaymentMethod) &&
+            const DeepCollectionEquality()
+                .equals(other._paymentMethodOrder, _paymentMethodOrder) &&
             (identical(other.returnURL, returnURL) ||
                 other.returnURL == returnURL) &&
-            (identical(other.billingDetailsCollectionConfiguration,
-                    billingDetailsCollectionConfiguration) ||
+            (identical(other.billingDetailsCollectionConfiguration, billingDetailsCollectionConfiguration) ||
                 other.billingDetailsCollectionConfiguration ==
                     billingDetailsCollectionConfiguration) &&
-            (identical(other.removeSavedPaymentMethodMessage, removeSavedPaymentMethodMessage) ||
-                other.removeSavedPaymentMethodMessage ==
-                    removeSavedPaymentMethodMessage) &&
-            const DeepCollectionEquality()
-                .equals(other._preferredNetworks, _preferredNetworks));
+            (identical(other.removeSavedPaymentMethodMessage, removeSavedPaymentMethodMessage) || other.removeSavedPaymentMethodMessage == removeSavedPaymentMethodMessage) &&
+            const DeepCollectionEquality().equals(other._preferredNetworks, _preferredNetworks));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      customFlow,
-      customerId,
-      primaryButtonLabel,
-      customerEphemeralKeySecret,
-      paymentIntentClientSecret,
-      setupIntentClientSecret,
-      intentConfiguration,
-      merchantDisplayName,
-      applePay,
-      style,
-      googlePay,
-      allowsDelayedPaymentMethods,
-      appearance,
-      billingDetails,
-      returnURL,
-      billingDetailsCollectionConfiguration,
-      removeSavedPaymentMethodMessage,
-      const DeepCollectionEquality().hash(_preferredNetworks));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        customFlow,
+        customerId,
+        primaryButtonLabel,
+        customerEphemeralKeySecret,
+        customerSessionClientSecret,
+        paymentIntentClientSecret,
+        setupIntentClientSecret,
+        intentConfiguration,
+        merchantDisplayName,
+        applePay,
+        style,
+        googlePay,
+        allowsDelayedPaymentMethods,
+        appearance,
+        billingDetails,
+        allowsRemovalOfLastSavedPaymentMethod,
+        const DeepCollectionEquality().hash(_paymentMethodOrder),
+        returnURL,
+        billingDetailsCollectionConfiguration,
+        removeSavedPaymentMethodMessage,
+        const DeepCollectionEquality().hash(_preferredNetworks)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -731,6 +831,7 @@ abstract class _SetupParameters implements SetupPaymentSheetParameters {
       final String? customerId,
       final String? primaryButtonLabel,
       final String? customerEphemeralKeySecret,
+      final String? customerSessionClientSecret,
       final String? paymentIntentClientSecret,
       final String? setupIntentClientSecret,
       final IntentConfiguration? intentConfiguration,
@@ -742,6 +843,8 @@ abstract class _SetupParameters implements SetupPaymentSheetParameters {
       final PaymentSheetAppearance? appearance,
       @JsonKey(name: 'defaultBillingDetails')
       final BillingDetails? billingDetails,
+      final bool? allowsRemovalOfLastSavedPaymentMethod,
+      final List<String>? paymentMethodOrder,
       final String? returnURL,
       final BillingDetailsCollectionConfiguration?
           billingDetailsCollectionConfiguration,
@@ -773,6 +876,11 @@ abstract class _SetupParameters implements SetupPaymentSheetParameters {
 
   ///A temp key can be used for API operations that require a secret key.
   String? get customerEphemeralKeySecret;
+  @override
+
+  /// (Experimental) This parameter can be changed or removed at any time (use at your own risk).
+  /// The client secret of this Customer Session. Used on the client to set up secure access to the given customer.
+  String? get customerSessionClientSecret;
   @override
 
   /// Secret used for client-side retrieval using a publishable key.
@@ -833,6 +941,20 @@ abstract class _SetupParameters implements SetupPaymentSheetParameters {
   /// paymentIntent since the customer can change those.
   @JsonKey(name: 'defaultBillingDetails')
   BillingDetails? get billingDetails;
+  @override
+
+  ///This is an experimental feature that may be removed at any time.
+  /// Defaults to true. If true, the customer can delete all saved payment methods.
+  /// If false, the customer can't delete if they only have one saved payment method remaining.
+  bool? get allowsRemovalOfLastSavedPaymentMethod;
+  @override
+
+  /// By default, PaymentSheet will use a dynamic ordering that optimizes payment method display for the customer.
+  /// You can override the default order in which payment methods are displayed in PaymentSheet with a list of payment method types.
+  /// See https://stripe.com/docs/api/payment_methods/object#payment_method_object-type for the list of valid types.  You may also pass external payment methods.
+  /// Example: ["card", "external_paypal", "klarna"]
+  /// If you omit payment methods from this list, they’ll be automatically ordered by Stripe after the ones you provide. Invalid payment methods are ignored.
+  List<String>? get paymentMethodOrder;
   @override
 
   /// Return URL is required for IDEAL, Klarna and few other payment methods
@@ -1102,20 +1224,72 @@ abstract class _IntentConfiguration implements IntentConfiguration {
 }
 
 IntentMode _$IntentModeFromJson(Map<String, dynamic> json) {
-  return _IntentMode.fromJson(json);
+  switch (json['runtimeType']) {
+    case 'paymentMode':
+      return _PaymentMode.fromJson(json);
+    case 'setupMode':
+      return _SetupMode.fromJson(json);
+
+    default:
+      throw CheckedFromJsonException(json, 'runtimeType', 'IntentMode',
+          'Invalid union type "${json['runtimeType']}"!');
+  }
 }
 
 /// @nodoc
 mixin _$IntentMode {
-  String get currencyCode => throw _privateConstructorUsedError;
-  int get amount => throw _privateConstructorUsedError;
+  String? get currencyCode => throw _privateConstructorUsedError;
 
   /// Data related to the future payment intent
   IntentFutureUsage? get setupFutureUsage => throw _privateConstructorUsedError;
-
-  /// Capture method for the future payment intent
-  CaptureMethod? get captureMethod => throw _privateConstructorUsedError;
-
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String currencyCode, int amount,
+            IntentFutureUsage? setupFutureUsage, CaptureMethod? captureMethod)
+        paymentMode,
+    required TResult Function(
+            String? currencyCode, IntentFutureUsage setupFutureUsage)
+        setupMode,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String currencyCode, int amount,
+            IntentFutureUsage? setupFutureUsage, CaptureMethod? captureMethod)?
+        paymentMode,
+    TResult? Function(String? currencyCode, IntentFutureUsage setupFutureUsage)?
+        setupMode,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String currencyCode, int amount,
+            IntentFutureUsage? setupFutureUsage, CaptureMethod? captureMethod)?
+        paymentMode,
+    TResult Function(String? currencyCode, IntentFutureUsage setupFutureUsage)?
+        setupMode,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_PaymentMode value) paymentMode,
+    required TResult Function(_SetupMode value) setupMode,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_PaymentMode value)? paymentMode,
+    TResult? Function(_SetupMode value)? setupMode,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_PaymentMode value)? paymentMode,
+    TResult Function(_SetupMode value)? setupMode,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $IntentModeCopyWith<IntentMode> get copyWith =>
@@ -1128,11 +1302,7 @@ abstract class $IntentModeCopyWith<$Res> {
           IntentMode value, $Res Function(IntentMode) then) =
       _$IntentModeCopyWithImpl<$Res, IntentMode>;
   @useResult
-  $Res call(
-      {String currencyCode,
-      int amount,
-      IntentFutureUsage? setupFutureUsage,
-      CaptureMethod? captureMethod});
+  $Res call({String currencyCode, IntentFutureUsage setupFutureUsage});
 }
 
 /// @nodoc
@@ -1149,37 +1319,27 @@ class _$IntentModeCopyWithImpl<$Res, $Val extends IntentMode>
   @override
   $Res call({
     Object? currencyCode = null,
-    Object? amount = null,
-    Object? setupFutureUsage = freezed,
-    Object? captureMethod = freezed,
+    Object? setupFutureUsage = null,
   }) {
     return _then(_value.copyWith(
       currencyCode: null == currencyCode
-          ? _value.currencyCode
+          ? _value.currencyCode!
           : currencyCode // ignore: cast_nullable_to_non_nullable
               as String,
-      amount: null == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as int,
-      setupFutureUsage: freezed == setupFutureUsage
-          ? _value.setupFutureUsage
+      setupFutureUsage: null == setupFutureUsage
+          ? _value.setupFutureUsage!
           : setupFutureUsage // ignore: cast_nullable_to_non_nullable
-              as IntentFutureUsage?,
-      captureMethod: freezed == captureMethod
-          ? _value.captureMethod
-          : captureMethod // ignore: cast_nullable_to_non_nullable
-              as CaptureMethod?,
+              as IntentFutureUsage,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$IntentModeImplCopyWith<$Res>
+abstract class _$$PaymentModeImplCopyWith<$Res>
     implements $IntentModeCopyWith<$Res> {
-  factory _$$IntentModeImplCopyWith(
-          _$IntentModeImpl value, $Res Function(_$IntentModeImpl) then) =
-      __$$IntentModeImplCopyWithImpl<$Res>;
+  factory _$$PaymentModeImplCopyWith(
+          _$PaymentModeImpl value, $Res Function(_$PaymentModeImpl) then) =
+      __$$PaymentModeImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1190,11 +1350,11 @@ abstract class _$$IntentModeImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$IntentModeImplCopyWithImpl<$Res>
-    extends _$IntentModeCopyWithImpl<$Res, _$IntentModeImpl>
-    implements _$$IntentModeImplCopyWith<$Res> {
-  __$$IntentModeImplCopyWithImpl(
-      _$IntentModeImpl _value, $Res Function(_$IntentModeImpl) _then)
+class __$$PaymentModeImplCopyWithImpl<$Res>
+    extends _$IntentModeCopyWithImpl<$Res, _$PaymentModeImpl>
+    implements _$$PaymentModeImplCopyWith<$Res> {
+  __$$PaymentModeImplCopyWithImpl(
+      _$PaymentModeImpl _value, $Res Function(_$PaymentModeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1205,7 +1365,7 @@ class __$$IntentModeImplCopyWithImpl<$Res>
     Object? setupFutureUsage = freezed,
     Object? captureMethod = freezed,
   }) {
-    return _then(_$IntentModeImpl(
+    return _then(_$PaymentModeImpl(
       currencyCode: null == currencyCode
           ? _value.currencyCode
           : currencyCode // ignore: cast_nullable_to_non_nullable
@@ -1228,16 +1388,18 @@ class __$$IntentModeImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-@JsonSerializable(explicitToJson: true)
-class _$IntentModeImpl implements _IntentMode {
-  const _$IntentModeImpl(
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
+class _$PaymentModeImpl implements _PaymentMode {
+  const _$PaymentModeImpl(
       {required this.currencyCode,
       required this.amount,
       this.setupFutureUsage,
-      this.captureMethod});
+      this.captureMethod,
+      final String? $type})
+      : $type = $type ?? 'paymentMode';
 
-  factory _$IntentModeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$IntentModeImplFromJson(json);
+  factory _$PaymentModeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PaymentModeImplFromJson(json);
 
   @override
   final String currencyCode;
@@ -1252,16 +1414,19 @@ class _$IntentModeImpl implements _IntentMode {
   @override
   final CaptureMethod? captureMethod;
 
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
   @override
   String toString() {
-    return 'IntentMode(currencyCode: $currencyCode, amount: $amount, setupFutureUsage: $setupFutureUsage, captureMethod: $captureMethod)';
+    return 'IntentMode.paymentMode(currencyCode: $currencyCode, amount: $amount, setupFutureUsage: $setupFutureUsage, captureMethod: $captureMethod)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$IntentModeImpl &&
+            other is _$PaymentModeImpl &&
             (identical(other.currencyCode, currencyCode) ||
                 other.currencyCode == currencyCode) &&
             (identical(other.amount, amount) || other.amount == amount) &&
@@ -1279,42 +1444,298 @@ class _$IntentModeImpl implements _IntentMode {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$IntentModeImplCopyWith<_$IntentModeImpl> get copyWith =>
-      __$$IntentModeImplCopyWithImpl<_$IntentModeImpl>(this, _$identity);
+  _$$PaymentModeImplCopyWith<_$PaymentModeImpl> get copyWith =>
+      __$$PaymentModeImplCopyWithImpl<_$PaymentModeImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String currencyCode, int amount,
+            IntentFutureUsage? setupFutureUsage, CaptureMethod? captureMethod)
+        paymentMode,
+    required TResult Function(
+            String? currencyCode, IntentFutureUsage setupFutureUsage)
+        setupMode,
+  }) {
+    return paymentMode(currencyCode, amount, setupFutureUsage, captureMethod);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String currencyCode, int amount,
+            IntentFutureUsage? setupFutureUsage, CaptureMethod? captureMethod)?
+        paymentMode,
+    TResult? Function(String? currencyCode, IntentFutureUsage setupFutureUsage)?
+        setupMode,
+  }) {
+    return paymentMode?.call(
+        currencyCode, amount, setupFutureUsage, captureMethod);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String currencyCode, int amount,
+            IntentFutureUsage? setupFutureUsage, CaptureMethod? captureMethod)?
+        paymentMode,
+    TResult Function(String? currencyCode, IntentFutureUsage setupFutureUsage)?
+        setupMode,
+    required TResult orElse(),
+  }) {
+    if (paymentMode != null) {
+      return paymentMode(currencyCode, amount, setupFutureUsage, captureMethod);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_PaymentMode value) paymentMode,
+    required TResult Function(_SetupMode value) setupMode,
+  }) {
+    return paymentMode(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_PaymentMode value)? paymentMode,
+    TResult? Function(_SetupMode value)? setupMode,
+  }) {
+    return paymentMode?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_PaymentMode value)? paymentMode,
+    TResult Function(_SetupMode value)? setupMode,
+    required TResult orElse(),
+  }) {
+    if (paymentMode != null) {
+      return paymentMode(this);
+    }
+    return orElse();
+  }
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$IntentModeImplToJson(
+    return _$$PaymentModeImplToJson(
       this,
     );
   }
 }
 
-abstract class _IntentMode implements IntentMode {
-  const factory _IntentMode(
+abstract class _PaymentMode implements IntentMode {
+  const factory _PaymentMode(
       {required final String currencyCode,
       required final int amount,
       final IntentFutureUsage? setupFutureUsage,
-      final CaptureMethod? captureMethod}) = _$IntentModeImpl;
+      final CaptureMethod? captureMethod}) = _$PaymentModeImpl;
 
-  factory _IntentMode.fromJson(Map<String, dynamic> json) =
-      _$IntentModeImpl.fromJson;
+  factory _PaymentMode.fromJson(Map<String, dynamic> json) =
+      _$PaymentModeImpl.fromJson;
 
   @override
   String get currencyCode;
-  @override
   int get amount;
   @override
 
   /// Data related to the future payment intent
   IntentFutureUsage? get setupFutureUsage;
-  @override
 
   /// Capture method for the future payment intent
   CaptureMethod? get captureMethod;
   @override
   @JsonKey(ignore: true)
-  _$$IntentModeImplCopyWith<_$IntentModeImpl> get copyWith =>
+  _$$PaymentModeImplCopyWith<_$PaymentModeImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SetupModeImplCopyWith<$Res>
+    implements $IntentModeCopyWith<$Res> {
+  factory _$$SetupModeImplCopyWith(
+          _$SetupModeImpl value, $Res Function(_$SetupModeImpl) then) =
+      __$$SetupModeImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? currencyCode, IntentFutureUsage setupFutureUsage});
+}
+
+/// @nodoc
+class __$$SetupModeImplCopyWithImpl<$Res>
+    extends _$IntentModeCopyWithImpl<$Res, _$SetupModeImpl>
+    implements _$$SetupModeImplCopyWith<$Res> {
+  __$$SetupModeImplCopyWithImpl(
+      _$SetupModeImpl _value, $Res Function(_$SetupModeImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? currencyCode = freezed,
+    Object? setupFutureUsage = null,
+  }) {
+    return _then(_$SetupModeImpl(
+      currencyCode: freezed == currencyCode
+          ? _value.currencyCode
+          : currencyCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      setupFutureUsage: null == setupFutureUsage
+          ? _value.setupFutureUsage
+          : setupFutureUsage // ignore: cast_nullable_to_non_nullable
+              as IntentFutureUsage,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(explicitToJson: true)
+class _$SetupModeImpl implements _SetupMode {
+  const _$SetupModeImpl(
+      {this.currencyCode, required this.setupFutureUsage, final String? $type})
+      : $type = $type ?? 'setupMode';
+
+  factory _$SetupModeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SetupModeImplFromJson(json);
+
+  @override
+  final String? currencyCode;
+
+  /// Data related to the future payment intent
+  @override
+  final IntentFutureUsage setupFutureUsage;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'IntentMode.setupMode(currencyCode: $currencyCode, setupFutureUsage: $setupFutureUsage)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SetupModeImpl &&
+            (identical(other.currencyCode, currencyCode) ||
+                other.currencyCode == currencyCode) &&
+            (identical(other.setupFutureUsage, setupFutureUsage) ||
+                other.setupFutureUsage == setupFutureUsage));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, currencyCode, setupFutureUsage);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetupModeImplCopyWith<_$SetupModeImpl> get copyWith =>
+      __$$SetupModeImplCopyWithImpl<_$SetupModeImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String currencyCode, int amount,
+            IntentFutureUsage? setupFutureUsage, CaptureMethod? captureMethod)
+        paymentMode,
+    required TResult Function(
+            String? currencyCode, IntentFutureUsage setupFutureUsage)
+        setupMode,
+  }) {
+    return setupMode(currencyCode, setupFutureUsage);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String currencyCode, int amount,
+            IntentFutureUsage? setupFutureUsage, CaptureMethod? captureMethod)?
+        paymentMode,
+    TResult? Function(String? currencyCode, IntentFutureUsage setupFutureUsage)?
+        setupMode,
+  }) {
+    return setupMode?.call(currencyCode, setupFutureUsage);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String currencyCode, int amount,
+            IntentFutureUsage? setupFutureUsage, CaptureMethod? captureMethod)?
+        paymentMode,
+    TResult Function(String? currencyCode, IntentFutureUsage setupFutureUsage)?
+        setupMode,
+    required TResult orElse(),
+  }) {
+    if (setupMode != null) {
+      return setupMode(currencyCode, setupFutureUsage);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_PaymentMode value) paymentMode,
+    required TResult Function(_SetupMode value) setupMode,
+  }) {
+    return setupMode(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_PaymentMode value)? paymentMode,
+    TResult? Function(_SetupMode value)? setupMode,
+  }) {
+    return setupMode?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_PaymentMode value)? paymentMode,
+    TResult Function(_SetupMode value)? setupMode,
+    required TResult orElse(),
+  }) {
+    if (setupMode != null) {
+      return setupMode(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$SetupModeImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _SetupMode implements IntentMode {
+  const factory _SetupMode(
+      {final String? currencyCode,
+      required final IntentFutureUsage setupFutureUsage}) = _$SetupModeImpl;
+
+  factory _SetupMode.fromJson(Map<String, dynamic> json) =
+      _$SetupModeImpl.fromJson;
+
+  @override
+  String? get currencyCode;
+  @override
+
+  /// Data related to the future payment intent
+  IntentFutureUsage get setupFutureUsage;
+  @override
+  @JsonKey(ignore: true)
+  _$$SetupModeImplCopyWith<_$SetupModeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1651,6 +2072,7 @@ mixin _$PaymentSheetGooglePay {
   String? get amount => throw _privateConstructorUsedError;
 
   /// The Google Pay button type to use. Set to "Pay" by default.
+  @JsonKey(toJson: PaymentSheetGooglePay.platformButtonTypeToJson)
   PlatformButtonType? get buttonType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1671,6 +2093,7 @@ abstract class $PaymentSheetGooglePayCopyWith<$Res> {
       bool testEnv,
       String? label,
       String? amount,
+      @JsonKey(toJson: PaymentSheetGooglePay.platformButtonTypeToJson)
       PlatformButtonType? buttonType});
 }
 
@@ -1739,6 +2162,7 @@ abstract class _$$PaymentSheetGooglePayImplCopyWith<$Res>
       bool testEnv,
       String? label,
       String? amount,
+      @JsonKey(toJson: PaymentSheetGooglePay.platformButtonTypeToJson)
       PlatformButtonType? buttonType});
 }
 
@@ -1800,6 +2224,7 @@ class _$PaymentSheetGooglePayImpl implements _PaymentSheetGooglePay {
       this.testEnv = false,
       this.label,
       this.amount,
+      @JsonKey(toJson: PaymentSheetGooglePay.platformButtonTypeToJson)
       this.buttonType});
 
   factory _$PaymentSheetGooglePayImpl.fromJson(Map<String, dynamic> json) =>
@@ -1828,6 +2253,7 @@ class _$PaymentSheetGooglePayImpl implements _PaymentSheetGooglePay {
 
   /// The Google Pay button type to use. Set to "Pay" by default.
   @override
+  @JsonKey(toJson: PaymentSheetGooglePay.platformButtonTypeToJson)
   final PlatformButtonType? buttonType;
 
   @override
@@ -1878,6 +2304,7 @@ abstract class _PaymentSheetGooglePay implements PaymentSheetGooglePay {
       final bool testEnv,
       final String? label,
       final String? amount,
+      @JsonKey(toJson: PaymentSheetGooglePay.platformButtonTypeToJson)
       final PlatformButtonType? buttonType}) = _$PaymentSheetGooglePayImpl;
 
   factory _PaymentSheetGooglePay.fromJson(Map<String, dynamic> json) =
@@ -1906,6 +2333,7 @@ abstract class _PaymentSheetGooglePay implements PaymentSheetGooglePay {
   @override
 
   /// The Google Pay button type to use. Set to "Pay" by default.
+  @JsonKey(toJson: PaymentSheetGooglePay.platformButtonTypeToJson)
   PlatformButtonType? get buttonType;
   @override
   @JsonKey(ignore: true)

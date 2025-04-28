@@ -1,11 +1,14 @@
+// ignore_for_file: library_annotations
+
 @TestOn('browser')
 @Tags(["browser"])
 
 import 'dart:async';
-import 'dart:html';
+
 import 'package:stripe_js/stripe_api.dart';
 import 'package:stripe_js/stripe_js.dart';
 import 'package:test/test.dart';
+import 'package:web/web.dart';
 
 import '../helpers/helpers.dart';
 
@@ -29,22 +32,22 @@ void main() {
 
     test('can be mounted', () {
       expect(
-        document.getElementsByClassName('__PrivateStripeElement'),
-        isEmpty,
+        document.getElementsByClassName('__PrivateStripeElement').length,
+        0,
       );
-      final child = DivElement();
+      final child = HTMLDivElement();
       document.body!.append(child);
       final card = elements.createCard();
       card.mount(child);
       expect(
-        document.getElementsByClassName('__PrivateStripeElement'),
-        isNotNull,
+        document.getElementsByClassName('__PrivateStripeElement').length,
+        isNot(0),
       );
     });
 
     test('calls on ready', () async {
-      final child = DivElement();
-      ;
+      final child = HTMLDivElement();
+
       document.body!.append(child);
       await Future.delayed(Duration(seconds: 4));
       final card = elements.createCard();
@@ -59,7 +62,7 @@ void main() {
     });
 
     test('can listen to focus', () async {
-      final child = DivElement();
+      final child = HTMLDivElement();
       document.body!.append(child);
       final card = elements.createCard();
       card.mount(child);
@@ -75,7 +78,7 @@ void main() {
       expect(onFocusCompleter.future, completes);
     });
     test('can listen to blur', () async {
-      final child = DivElement();
+      final child = HTMLDivElement();
       document.body!.append(child);
       final card = elements.createCard();
       card.mount(child);

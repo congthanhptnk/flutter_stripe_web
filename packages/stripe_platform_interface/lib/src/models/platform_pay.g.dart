@@ -347,7 +347,7 @@ _$GooglePayPaymentMethodParamsImpl _$$GooglePayPaymentMethodParamsImplFromJson(
     _$GooglePayPaymentMethodParamsImpl(
       existingPaymentMethodRequired:
           json['existingPaymentMethodRequired'] as bool?,
-      amount: json['amount'] as int,
+      amount: (json['amount'] as num).toInt(),
       billingAddressConfig: json['billingAddressConfig'] == null
           ? null
           : GooglePayBillingAddressConfig.fromJson(
@@ -412,11 +412,11 @@ _$PaymentRequestTypeRecurringImpl _$$PaymentRequestTypeRecurringImplFromJson(
     _$PaymentRequestTypeRecurringImpl(
       description: json['description'] as String,
       managementUrl: json['managementUrl'] as String,
-      billing: ImmediateCartSummaryItem.fromJson(
+      billing: RecurringCartSummaryItem.fromJson(
           json['billing'] as Map<String, dynamic>),
       trialBilling: json['trialBilling'] == null
           ? null
-          : ImmediateCartSummaryItem.fromJson(
+          : RecurringCartSummaryItem.fromJson(
               json['trialBilling'] as Map<String, dynamic>),
       billingAgreement: json['billingAgreement'] as String?,
       tokenNotificationURL: json['tokenNotificationURL'] as String?,

@@ -12,7 +12,7 @@ part of 'create_token_pii_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 CreateTokenPIIData _$CreateTokenPIIDataFromJson(Map<String, dynamic> json) {
   return _CreateTokenPIIData.fromJson(json);
@@ -23,8 +23,12 @@ mixin _$CreateTokenPIIData {
   @JsonKey(name: "personal_id_number")
   String get personalIdNumber => throw _privateConstructorUsedError;
 
+  /// Serializes this CreateTokenPIIData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CreateTokenPIIData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CreateTokenPIIDataCopyWith<CreateTokenPIIData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +52,8 @@ class _$CreateTokenPIIDataCopyWithImpl<$Res, $Val extends CreateTokenPIIData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CreateTokenPIIData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -63,30 +69,32 @@ class _$CreateTokenPIIDataCopyWithImpl<$Res, $Val extends CreateTokenPIIData>
 }
 
 /// @nodoc
-abstract class _$$_CreateTokenPIIDataCopyWith<$Res>
+abstract class _$$CreateTokenPIIDataImplCopyWith<$Res>
     implements $CreateTokenPIIDataCopyWith<$Res> {
-  factory _$$_CreateTokenPIIDataCopyWith(_$_CreateTokenPIIData value,
-          $Res Function(_$_CreateTokenPIIData) then) =
-      __$$_CreateTokenPIIDataCopyWithImpl<$Res>;
+  factory _$$CreateTokenPIIDataImplCopyWith(_$CreateTokenPIIDataImpl value,
+          $Res Function(_$CreateTokenPIIDataImpl) then) =
+      __$$CreateTokenPIIDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: "personal_id_number") String personalIdNumber});
 }
 
 /// @nodoc
-class __$$_CreateTokenPIIDataCopyWithImpl<$Res>
-    extends _$CreateTokenPIIDataCopyWithImpl<$Res, _$_CreateTokenPIIData>
-    implements _$$_CreateTokenPIIDataCopyWith<$Res> {
-  __$$_CreateTokenPIIDataCopyWithImpl(
-      _$_CreateTokenPIIData _value, $Res Function(_$_CreateTokenPIIData) _then)
+class __$$CreateTokenPIIDataImplCopyWithImpl<$Res>
+    extends _$CreateTokenPIIDataCopyWithImpl<$Res, _$CreateTokenPIIDataImpl>
+    implements _$$CreateTokenPIIDataImplCopyWith<$Res> {
+  __$$CreateTokenPIIDataImplCopyWithImpl(_$CreateTokenPIIDataImpl _value,
+      $Res Function(_$CreateTokenPIIDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CreateTokenPIIData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? personalIdNumber = null,
   }) {
-    return _then(_$_CreateTokenPIIData(
+    return _then(_$CreateTokenPIIDataImpl(
       personalIdNumber: null == personalIdNumber
           ? _value.personalIdNumber
           : personalIdNumber // ignore: cast_nullable_to_non_nullable
@@ -97,12 +105,12 @@ class __$$_CreateTokenPIIDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CreateTokenPIIData implements _CreateTokenPIIData {
-  const _$_CreateTokenPIIData(
+class _$CreateTokenPIIDataImpl implements _CreateTokenPIIData {
+  const _$CreateTokenPIIDataImpl(
       {@JsonKey(name: "personal_id_number") required this.personalIdNumber});
 
-  factory _$_CreateTokenPIIData.fromJson(Map<String, dynamic> json) =>
-      _$$_CreateTokenPIIDataFromJson(json);
+  factory _$CreateTokenPIIDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CreateTokenPIIDataImplFromJson(json);
 
   @override
   @JsonKey(name: "personal_id_number")
@@ -114,28 +122,30 @@ class _$_CreateTokenPIIData implements _CreateTokenPIIData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CreateTokenPIIData &&
+            other is _$CreateTokenPIIDataImpl &&
             (identical(other.personalIdNumber, personalIdNumber) ||
                 other.personalIdNumber == personalIdNumber));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, personalIdNumber);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CreateTokenPIIData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CreateTokenPIIDataCopyWith<_$_CreateTokenPIIData> get copyWith =>
-      __$$_CreateTokenPIIDataCopyWithImpl<_$_CreateTokenPIIData>(
+  _$$CreateTokenPIIDataImplCopyWith<_$CreateTokenPIIDataImpl> get copyWith =>
+      __$$CreateTokenPIIDataImplCopyWithImpl<_$CreateTokenPIIDataImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CreateTokenPIIDataToJson(
+    return _$$CreateTokenPIIDataImplToJson(
       this,
     );
   }
@@ -144,16 +154,19 @@ class _$_CreateTokenPIIData implements _CreateTokenPIIData {
 abstract class _CreateTokenPIIData implements CreateTokenPIIData {
   const factory _CreateTokenPIIData(
       {@JsonKey(name: "personal_id_number")
-      required final String personalIdNumber}) = _$_CreateTokenPIIData;
+      required final String personalIdNumber}) = _$CreateTokenPIIDataImpl;
 
   factory _CreateTokenPIIData.fromJson(Map<String, dynamic> json) =
-      _$_CreateTokenPIIData.fromJson;
+      _$CreateTokenPIIDataImpl.fromJson;
 
   @override
   @JsonKey(name: "personal_id_number")
   String get personalIdNumber;
+
+  /// Create a copy of CreateTokenPIIData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_CreateTokenPIIDataCopyWith<_$_CreateTokenPIIData> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CreateTokenPIIDataImplCopyWith<_$CreateTokenPIIDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

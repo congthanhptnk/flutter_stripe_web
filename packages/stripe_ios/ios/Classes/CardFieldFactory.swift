@@ -137,6 +137,10 @@ class CardFieldPlatformView: NSObject, FlutterPlatformView, STPPaymentCardTextFi
             cardField.disabled = disabled
         }
         
+        if let onBehalfOf = arguments["onBehalfOf"] as? String{
+            cardField.onBehalfOf = onBehalfOf
+        }
+        
         if let preferredNetworks = arguments["preferredNetworks"] as? Array<Int>{
             cardField.preferredNetworks = preferredNetworks
         }
@@ -162,7 +166,7 @@ extension CardFieldView {
         cardParams.type = STPPaymentMethodType.card
         cardParams.card = cardMethodParams
         
-        self.cardField.paymentMethodParams.card = cardMethodParams
+        self.cardField.paymentMethodParams = STPPaymentMethodParams.paramsWith(card: cardMethodParams, billingDetails: nil, metadata: nil)
         self.cardField.postalCode = params["postalCode"] as? String
         self.cardParams = cardParams
         self.cardPostalCode = params["postalCode"] as? String

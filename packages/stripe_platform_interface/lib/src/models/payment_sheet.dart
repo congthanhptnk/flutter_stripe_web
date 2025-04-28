@@ -32,6 +32,10 @@ class SetupPaymentSheetParameters with _$SetupPaymentSheetParameters {
     ///A temp key can be used for API operations that require a secret key.
     String? customerEphemeralKeySecret,
 
+    /// (Experimental) This parameter can be changed or removed at any time (use at your own risk).
+    /// The client secret of this Customer Session. Used on the client to set up secure access to the given customer.
+    String? customerSessionClientSecret,
+
     /// Secret used for client-side retrieval using a publishable key.
     ///
     /// If this value is null make sure to add a [setupIntentClientSecret]
@@ -81,6 +85,18 @@ class SetupPaymentSheetParameters with _$SetupPaymentSheetParameters {
     /// paymentIntent since the customer can change those.
     @JsonKey(name: 'defaultBillingDetails') BillingDetails? billingDetails,
 
+    ///This is an experimental feature that may be removed at any time.
+    /// Defaults to true. If true, the customer can delete all saved payment methods.
+    /// If false, the customer can't delete if they only have one saved payment method remaining.
+    bool? allowsRemovalOfLastSavedPaymentMethod,
+
+    /// By default, PaymentSheet will use a dynamic ordering that optimizes payment method display for the customer.
+    /// You can override the default order in which payment methods are displayed in PaymentSheet with a list of payment method types.
+    /// See https://stripe.com/docs/api/payment_methods/object#payment_method_object-type for the list of valid types.  You may also pass external payment methods.
+    /// Example: ["card", "external_paypal", "klarna"]
+    /// If you omit payment methods from this list, they’ll be automatically ordered by Stripe after the ones you provide. Invalid payment methods are ignored.
+    List<String>? paymentMethodOrder,
+
     /// Return URL is required for IDEAL, Klarna and few other payment methods
     String? returnURL,
 
@@ -125,9 +141,9 @@ class IntentConfiguration with _$IntentConfiguration {
 }
 
 @freezed
-class IntentMode with _$IntentMode {
-  @JsonSerializable(explicitToJson: true)
-  const factory IntentMode({
+sealed class IntentMode with _$IntentMode {
+  @JsonSerializable(explicitToJson: true, includeIfNull: false)
+  const factory IntentMode.paymentMode({
     required String currencyCode,
     required int amount,
 
@@ -136,7 +152,15 @@ class IntentMode with _$IntentMode {
 
     /// Capture method for the future payment intent
     CaptureMethod? captureMethod,
-  }) = _IntentMode;
+  }) = _PaymentMode;
+
+  @JsonSerializable(explicitToJson: true)
+  const factory IntentMode.setupMode({
+    String? currencyCode,
+
+    /// Data related to the future payment intent
+    required IntentFutureUsage setupFutureUsage,
+  }) = _SetupMode;
 
   factory IntentMode.fromJson(Map<String, dynamic> json) =>
       _$IntentModeFromJson(json);
@@ -193,8 +217,11 @@ class PaymentSheetGooglePay with _$PaymentSheetGooglePay {
     String? amount,
 
     /// The Google Pay button type to use. Set to "Pay" by default.
+    @JsonKey(toJson: PaymentSheetGooglePay.platformButtonTypeToJson)
     PlatformButtonType? buttonType,
   }) = _PaymentSheetGooglePay;
+
+  static int? platformButtonTypeToJson(PlatformButtonType? type) => type?.id;
 
   factory PaymentSheetGooglePay.fromJson(Map<String, dynamic> json) =>
       _$PaymentSheetGooglePayFromJson(json);

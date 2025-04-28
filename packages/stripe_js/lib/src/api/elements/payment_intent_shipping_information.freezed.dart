@@ -12,7 +12,7 @@ part of 'payment_intent_shipping_information.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PaymentElementShippingDetails _$PaymentElementShippingDetailsFromJson(
     Map<String, dynamic> json) {
@@ -27,8 +27,12 @@ mixin _$PaymentElementShippingDetails {
   /// Refer to the Payment Intents API for a full list of parameters.
   String? get trackingNumber => throw _privateConstructorUsedError;
 
+  /// Serializes this PaymentElementShippingDetails to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PaymentElementShippingDetails
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PaymentElementShippingDetailsCopyWith<PaymentElementShippingDetails>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -55,6 +59,8 @@ class _$PaymentElementShippingDetailsCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PaymentElementShippingDetails
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -70,33 +76,35 @@ class _$PaymentElementShippingDetailsCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PaymentElementShippingDetailsCopyWith<$Res>
+abstract class _$$PaymentElementShippingDetailsImplCopyWith<$Res>
     implements $PaymentElementShippingDetailsCopyWith<$Res> {
-  factory _$$_PaymentElementShippingDetailsCopyWith(
-          _$_PaymentElementShippingDetails value,
-          $Res Function(_$_PaymentElementShippingDetails) then) =
-      __$$_PaymentElementShippingDetailsCopyWithImpl<$Res>;
+  factory _$$PaymentElementShippingDetailsImplCopyWith(
+          _$PaymentElementShippingDetailsImpl value,
+          $Res Function(_$PaymentElementShippingDetailsImpl) then) =
+      __$$PaymentElementShippingDetailsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? trackingNumber});
 }
 
 /// @nodoc
-class __$$_PaymentElementShippingDetailsCopyWithImpl<$Res>
+class __$$PaymentElementShippingDetailsImplCopyWithImpl<$Res>
     extends _$PaymentElementShippingDetailsCopyWithImpl<$Res,
-        _$_PaymentElementShippingDetails>
-    implements _$$_PaymentElementShippingDetailsCopyWith<$Res> {
-  __$$_PaymentElementShippingDetailsCopyWithImpl(
-      _$_PaymentElementShippingDetails _value,
-      $Res Function(_$_PaymentElementShippingDetails) _then)
+        _$PaymentElementShippingDetailsImpl>
+    implements _$$PaymentElementShippingDetailsImplCopyWith<$Res> {
+  __$$PaymentElementShippingDetailsImplCopyWithImpl(
+      _$PaymentElementShippingDetailsImpl _value,
+      $Res Function(_$PaymentElementShippingDetailsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PaymentElementShippingDetails
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? trackingNumber = freezed,
   }) {
-    return _then(_$_PaymentElementShippingDetails(
+    return _then(_$PaymentElementShippingDetailsImpl(
       trackingNumber: freezed == trackingNumber
           ? _value.trackingNumber
           : trackingNumber // ignore: cast_nullable_to_non_nullable
@@ -107,13 +115,13 @@ class __$$_PaymentElementShippingDetailsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PaymentElementShippingDetails
+class _$PaymentElementShippingDetailsImpl
     implements _PaymentElementShippingDetails {
-  const _$_PaymentElementShippingDetails({this.trackingNumber});
+  const _$PaymentElementShippingDetailsImpl({this.trackingNumber});
 
-  factory _$_PaymentElementShippingDetails.fromJson(
+  factory _$PaymentElementShippingDetailsImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$_PaymentElementShippingDetailsFromJson(json);
+      _$$PaymentElementShippingDetailsImplFromJson(json);
 
   /// The Elements instance that was used to create the Payment Element.
 //  @ElementsConverter() required Elements elements,
@@ -128,28 +136,31 @@ class _$_PaymentElementShippingDetails
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentElementShippingDetails &&
+            other is _$PaymentElementShippingDetailsImpl &&
             (identical(other.trackingNumber, trackingNumber) ||
                 other.trackingNumber == trackingNumber));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, trackingNumber);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PaymentElementShippingDetails
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentElementShippingDetailsCopyWith<_$_PaymentElementShippingDetails>
-      get copyWith => __$$_PaymentElementShippingDetailsCopyWithImpl<
-          _$_PaymentElementShippingDetails>(this, _$identity);
+  _$$PaymentElementShippingDetailsImplCopyWith<
+          _$PaymentElementShippingDetailsImpl>
+      get copyWith => __$$PaymentElementShippingDetailsImplCopyWithImpl<
+          _$PaymentElementShippingDetailsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PaymentElementShippingDetailsToJson(
+    return _$$PaymentElementShippingDetailsImplToJson(
       this,
     );
   }
@@ -158,20 +169,23 @@ class _$_PaymentElementShippingDetails
 abstract class _PaymentElementShippingDetails
     implements PaymentElementShippingDetails {
   const factory _PaymentElementShippingDetails({final String? trackingNumber}) =
-      _$_PaymentElementShippingDetails;
+      _$PaymentElementShippingDetailsImpl;
 
   factory _PaymentElementShippingDetails.fromJson(Map<String, dynamic> json) =
-      _$_PaymentElementShippingDetails.fromJson;
-
-  @override
+      _$PaymentElementShippingDetailsImpl.fromJson;
 
   /// The Elements instance that was used to create the Payment Element.
 //  @ElementsConverter() required Elements elements,
   /// Parameters that will be passed on to the Stripe API.
   /// Refer to the Payment Intents API for a full list of parameters.
-  String? get trackingNumber;
   @override
-  @JsonKey(ignore: true)
-  _$$_PaymentElementShippingDetailsCopyWith<_$_PaymentElementShippingDetails>
+  String? get trackingNumber;
+
+  /// Create a copy of PaymentElementShippingDetails
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PaymentElementShippingDetailsImplCopyWith<
+          _$PaymentElementShippingDetailsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

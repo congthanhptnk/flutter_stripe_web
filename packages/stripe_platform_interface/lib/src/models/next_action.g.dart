@@ -22,7 +22,7 @@ Map<String, dynamic> _$$NextActionRedirectImplToJson(
 
 _$NextActionOxxoImpl _$$NextActionOxxoImplFromJson(Map<String, dynamic> json) =>
     _$NextActionOxxoImpl(
-      expiration: json['expiration'] as int?,
+      expiration: (json['expiration'] as num?)?.toInt(),
       voucherURL: json['voucherURL'] as String?,
       voucherNumber: json['voucherNumber'] as String?,
       $type: json['type'] as String?,
@@ -66,5 +66,19 @@ Map<String, dynamic> _$$NextActionMicroDepositsImplToJson(
       'arrivalDate': instance.arrivalDate,
       'redirectUrl': instance.redirectUrl,
       'microdepositType': instance.microdepositType,
+      'type': instance.$type,
+    };
+
+_$NextActionMultiBancoImpl _$$NextActionMultiBancoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$NextActionMultiBancoImpl(
+      voucherURL: json['voucherURL'] as String?,
+      $type: json['type'] as String?,
+    );
+
+Map<String, dynamic> _$$NextActionMultiBancoImplToJson(
+        _$NextActionMultiBancoImpl instance) =>
+    <String, dynamic>{
+      'voucherURL': instance.voucherURL,
       'type': instance.$type,
     };

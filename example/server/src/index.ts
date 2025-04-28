@@ -6,6 +6,7 @@ env.config({ path: './.env' });
 
 import bodyParser from 'body-parser';
 import express from 'express';
+import cors from 'cors';
 
 import Stripe from 'stripe';
 import { generateResponse } from './utils';
@@ -15,6 +16,8 @@ const stripeSecretKey = process.env.STRIPE_SECRET_KEY || '';
 const stripeWebhookSecret = process.env.STRIPE_WEBHOOK_SECRET || '';
 
 const app = express();
+
+app.use(cors());
 
 app.use(
   (
@@ -374,6 +377,7 @@ app.post('/create-setup-intent', async (req, res) => {
   return res.send({
     publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
     clientSecret: setupIntent.client_secret,
+    customerId: customer.id,
   });
 });
 
@@ -616,7 +620,7 @@ app.post('/payment-sheet-subscription', async (_, res) => {
   } else {
     throw new Error(
       'Expected response type string, but received: ' +
-        typeof subscription.pending_setup_intent
+      typeof subscription.pending_setup_intent
     );
   }
 });

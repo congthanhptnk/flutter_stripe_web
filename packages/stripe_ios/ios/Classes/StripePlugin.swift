@@ -204,6 +204,8 @@ class StripePlugin: StripeSdk, FlutterPlugin, ViewManagerDelegate {
                 resolver: resolver(for: result),
                 rejecter: rejecter(for: result)
             )
+        case "handleNextActionForSetup":
+            return handleNextActionForSetupIntent(call, result: result)
         default:
             result(FlutterMethodNotImplemented)
         }
@@ -643,6 +645,7 @@ extension  StripePlugin {
         }
         
         intentCreationCallback(result: params, resolver: resolver(for: result), rejecter: rejecter(for: result))
+        result(nil)
     }
     
     func dangerouslyUpdateCardDetails(_ call: FlutterMethodCall, result: @escaping FlutterResult) {

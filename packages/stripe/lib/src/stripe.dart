@@ -141,7 +141,7 @@ class Stripe {
     return isSupported;
   }
 
-  /// Laucnhes the relevant native wallsheet (Apple Pay on iOS and Google Pay on Android)
+  /// Launches the relevant native wallsheet (Apple Pay on iOS and Google Pay on Android)
   /// in order to create a payment intent
   ///
   /// Argument [params] is describing the the Apple Pay or Google pay configuration.
@@ -540,8 +540,7 @@ class Stripe {
 
   /// Collect the bankaccount details for the payment intent.
   ///
-  /// Only US bank accounts are supported. This method is only implemented for
-  /// iOS at the moment.
+  /// Only US bank accounts are supported. 
   Future<PaymentIntent> collectBankAccount({
     /// Whether the clientsecret is associated with setup or paymentintent
     required bool isPaymentIntent,
@@ -586,8 +585,26 @@ class Stripe {
 
   /// check if a particular card can be provisioned with the current app
   /// on this particular device.
+  ///
+  /// This method is deprecated. Use [canAddCardToWallet] instead.
+  @Deprecated('Use [canAddCardToWallet] instead')
   Future<AddToWalletResult> canAddToWallet(String last4) async {
     return await _platform.canAddToWallet(last4);
+  }
+
+  /// check if a particular card can be provisioned with the current app
+  /// on this particular device.
+  /// Throws [StripeException] in case creating the token fails.
+  Future<CanAddCardToWalletResult> canAddCardToWallet(
+      CanAddCardToWalletParams params) async {
+    return await _platform.canAddCardToWallet(params);
+  }
+
+  /// check if a particular card can be provisioned with the current app
+  /// on this particular device.
+  /// Throws [StripeException] in case creating the token fails.
+  Future<IsCardInWalletResult> isCardInWallet(String cardLastFour) async {
+    return await _platform.isCardInWallet(cardLastFour);
   }
 
   /// Call the financial connections authentication flow in order to collect a US bank account to enhance payouts.

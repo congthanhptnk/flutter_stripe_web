@@ -12,7 +12,7 @@ part of 'element_appearance.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ElementAppearance _$ElementAppearanceFromJson(Map<String, dynamic> json) {
   return _ElementAppearance.fromJson(json);
@@ -26,8 +26,12 @@ mixin _$ElementAppearance {
       throw _privateConstructorUsedError;
   ElementAppearanceLabels get labels => throw _privateConstructorUsedError;
 
+  /// Serializes this ElementAppearance to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ElementAppearance
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ElementAppearanceCopyWith<ElementAppearance> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -55,6 +59,8 @@ class _$ElementAppearanceCopyWithImpl<$Res, $Val extends ElementAppearance>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ElementAppearance
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -85,11 +91,11 @@ class _$ElementAppearanceCopyWithImpl<$Res, $Val extends ElementAppearance>
 }
 
 /// @nodoc
-abstract class _$$_ElementAppearanceCopyWith<$Res>
+abstract class _$$ElementAppearanceImplCopyWith<$Res>
     implements $ElementAppearanceCopyWith<$Res> {
-  factory _$$_ElementAppearanceCopyWith(_$_ElementAppearance value,
-          $Res Function(_$_ElementAppearance) then) =
-      __$$_ElementAppearanceCopyWithImpl<$Res>;
+  factory _$$ElementAppearanceImplCopyWith(_$ElementAppearanceImpl value,
+          $Res Function(_$ElementAppearanceImpl) then) =
+      __$$ElementAppearanceImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -100,13 +106,15 @@ abstract class _$$_ElementAppearanceCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ElementAppearanceCopyWithImpl<$Res>
-    extends _$ElementAppearanceCopyWithImpl<$Res, _$_ElementAppearance>
-    implements _$$_ElementAppearanceCopyWith<$Res> {
-  __$$_ElementAppearanceCopyWithImpl(
-      _$_ElementAppearance _value, $Res Function(_$_ElementAppearance) _then)
+class __$$ElementAppearanceImplCopyWithImpl<$Res>
+    extends _$ElementAppearanceCopyWithImpl<$Res, _$ElementAppearanceImpl>
+    implements _$$ElementAppearanceImplCopyWith<$Res> {
+  __$$ElementAppearanceImplCopyWithImpl(_$ElementAppearanceImpl _value,
+      $Res Function(_$ElementAppearanceImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ElementAppearance
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -115,7 +123,7 @@ class __$$_ElementAppearanceCopyWithImpl<$Res>
     Object? rules = freezed,
     Object? labels = null,
   }) {
-    return _then(_$_ElementAppearance(
+    return _then(_$ElementAppearanceImpl(
       theme: null == theme
           ? _value.theme
           : theme // ignore: cast_nullable_to_non_nullable
@@ -138,8 +146,8 @@ class __$$_ElementAppearanceCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ElementAppearance implements _ElementAppearance {
-  const _$_ElementAppearance(
+class _$ElementAppearanceImpl implements _ElementAppearance {
+  const _$ElementAppearanceImpl(
       {this.theme = ElementTheme.stripe,
       final Map<String, String>? variables,
       final Map<String, Map<String, String>>? rules,
@@ -147,8 +155,8 @@ class _$_ElementAppearance implements _ElementAppearance {
       : _variables = variables,
         _rules = rules;
 
-  factory _$_ElementAppearance.fromJson(Map<String, dynamic> json) =>
-      _$$_ElementAppearanceFromJson(json);
+  factory _$ElementAppearanceImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ElementAppearanceImplFromJson(json);
 
   @override
   @JsonKey()
@@ -183,10 +191,10 @@ class _$_ElementAppearance implements _ElementAppearance {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ElementAppearance &&
+            other is _$ElementAppearanceImpl &&
             (identical(other.theme, theme) || other.theme == theme) &&
             const DeepCollectionEquality()
                 .equals(other._variables, _variables) &&
@@ -194,7 +202,7 @@ class _$_ElementAppearance implements _ElementAppearance {
             (identical(other.labels, labels) || other.labels == labels));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -203,16 +211,18 @@ class _$_ElementAppearance implements _ElementAppearance {
       const DeepCollectionEquality().hash(_rules),
       labels);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ElementAppearance
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ElementAppearanceCopyWith<_$_ElementAppearance> get copyWith =>
-      __$$_ElementAppearanceCopyWithImpl<_$_ElementAppearance>(
+  _$$ElementAppearanceImplCopyWith<_$ElementAppearanceImpl> get copyWith =>
+      __$$ElementAppearanceImplCopyWithImpl<_$ElementAppearanceImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ElementAppearanceToJson(
+    return _$$ElementAppearanceImplToJson(
       this,
     );
   }
@@ -223,10 +233,10 @@ abstract class _ElementAppearance implements ElementAppearance {
       {final ElementTheme theme,
       final Map<String, String>? variables,
       final Map<String, Map<String, String>>? rules,
-      final ElementAppearanceLabels labels}) = _$_ElementAppearance;
+      final ElementAppearanceLabels labels}) = _$ElementAppearanceImpl;
 
   factory _ElementAppearance.fromJson(Map<String, dynamic> json) =
-      _$_ElementAppearance.fromJson;
+      _$ElementAppearanceImpl.fromJson;
 
   @override
   ElementTheme get theme;
@@ -236,8 +246,11 @@ abstract class _ElementAppearance implements ElementAppearance {
   Map<String, Map<String, String>>? get rules;
   @override
   ElementAppearanceLabels get labels;
+
+  /// Create a copy of ElementAppearance
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_ElementAppearanceCopyWith<_$_ElementAppearance> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ElementAppearanceImplCopyWith<_$ElementAppearanceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

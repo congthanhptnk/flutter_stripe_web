@@ -1,11 +1,11 @@
-import 'dart:html';
+import 'dart:js_interop';
 import 'dart:ui' as ui;
 
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_stripe_web/flutter_stripe_web.dart';
 import 'package:flutter_stripe_web/src/parser/payment_request.dart';
-import 'package:flutter_stripe_web/src/utils.dart';
 import 'package:stripe_js/stripe_js.dart';
+import 'package:web/web.dart' as web;
 
 const kPlatformPayButtonDefaultHeight = 40.0;
 
@@ -17,7 +17,7 @@ class WebPlatformPayButton extends StatefulWidget {
       this.constraints,
       this.type,
       this.style,
-      required ui.VoidCallback this.onPressed});
+      required this.onPressed});
 
   final PlatformPayWebPaymentRequestCreateOptions paymentRequestCreateOptions;
   final PlatformButtonType? type;
@@ -32,6 +32,38 @@ class WebPlatformPayButton extends StatefulWidget {
 }
 
 class _WebPlatformPayButtonState extends State<WebPlatformPayButton> {
+  final web.HTMLDivElement _divElement = web.HTMLDivElement()
+    ..id = 'platform-pay-button';
+
+  late final web.MutationObserver mutationObserver = web.MutationObserver(
+      ((JSArray<web.MutationRecord> entries, web.MutationObserver observer) {
+    if (web.document.getElementById('platform-pay-button') != null) {
+      mutationObserver.disconnect();
+
+      final currentTheme = Theme.of(context);
+
+      PaymentRequest paymentRequest = WebStripe.js
+          .paymentRequest((widget.paymentRequestCreateOptions).toJS());
+
+      paymentRequest.canMakePayment().then((value) {
+        WebStripe.js.elements().createPaymentRequestButton(
+            JsPaymentRequestButtonElementCreateOptions(
+                paymentRequest: paymentRequest.js,
+                style: JsPaymentRequestButtonElementStyle(
+                    paymentRequestButton: PaymentRequestButtonStyleOptions(
+                  theme: theme(currentTheme.brightness),
+                  type: type,
+                  height: '${constraints.maxHeight}px',
+                ))))
+          ..on('click', (event) {
+            event.toDart['preventDefault']();
+            widget.onPressed();
+          })
+          ..mount('#platform-pay-button'.toJS);
+      });
+    }
+  }.toJS));
+
   BoxConstraints get constraints =>
       widget.constraints ??
       const BoxConstraints.expand(height: kPlatformPayButtonDefaultHeight);
@@ -39,9 +71,14 @@ class _WebPlatformPayButtonState extends State<WebPlatformPayButton> {
   @override
   void initState() {
     // ignore: undefined_prefixed_name
-    ui.platformViewRegistry.registerViewFactory('stripe_platform_pay_button',
-        (int viewId) => DivElement()..id = 'platform-pay-button');
-    _initButton();
+    ui.platformViewRegistry.registerViewFactory(
+        'stripe_platform_pay_button', (int viewId) => _divElement);
+
+    mutationObserver.observe(
+      web.document,
+      web.MutationObserverInit(childList: true, subtree: true),
+    );
+
     super.initState();
   }
 
@@ -58,58 +95,36 @@ class _WebPlatformPayButtonState extends State<WebPlatformPayButton> {
     );
   }
 
-  _initButton() {
-    ambiguate(WidgetsBinding.instance)?.addPostFrameCallback((timeStamp) {
-      PaymentRequest paymentRequest = WebStripe.js
-          .paymentRequest((widget.paymentRequestCreateOptions).toJS());
-
-      paymentRequest.canMakePayment().then((value) {
-        WebStripe.js.elements().createPaymentRequestButton(
-            JsPaymentRequestButtonElementCreateOptions(
-                paymentRequest: paymentRequest.js,
-                style: JsPaymentRequestButtonElementStyle(
-                    paymentRequestButton:
-                        JsPaymentRequestButtonElementStyleProps(
-                  theme: theme,
-                  type: type,
-                  height: '${constraints.maxHeight}px',
-                ))))
-          ..on('click', allowInterop((event) {
-            callMethod(event, 'preventDefault', []);
-            widget.onPressed();
-          }))
-          ..mount('#platform-pay-button');
-      });
-    });
-  }
-
-  String get type {
+  PaymentRequestButtonType get type {
     switch (widget.type) {
       case PlatformButtonType.buy:
-        return 'buy';
+        return PaymentRequestButtonType.buy;
       case PlatformButtonType.book:
-        return 'book';
+        return PaymentRequestButtonType.book;
       case PlatformButtonType.donate:
-        return 'donate';
+        return PaymentRequestButtonType.donate;
       case PlatformButtonType.plain:
+      case null:
+        return PaymentRequestButtonType.defaultType;
       default:
-        if (widget.type != null && widget.type != PlatformButtonType.plain) {
-          window.console.warn(
-              'PlatformPayButton: ${widget.type} is not supported on web - defaulting to plain presentation');
-        }
-        return 'default';
+        web.console.warn(
+          'PlatformPayButton: ${widget.type} is not supported on web - '
+                  'defaulting to plain presentation'
+              .toJS,
+        );
+        return PaymentRequestButtonType.defaultType;
     }
   }
 
-  String get theme {
-    switch (widget.style) {
-      case PlatformButtonStyle.white:
-        return 'light';
-      case PlatformButtonStyle.whiteOutline:
-        return 'light-outline';
-      case PlatformButtonStyle.black:
-      default:
-        return 'dark';
-    }
+  PaymentRequestButtonTheme theme(Brightness brightness) {
+    return switch (widget.style) {
+      PlatformButtonStyle.white => PaymentRequestButtonTheme.light,
+      PlatformButtonStyle.whiteOutline =>
+        PaymentRequestButtonTheme.lightOutline,
+      PlatformButtonStyle.black => PaymentRequestButtonTheme.dark,
+      PlatformButtonStyle.automatic || null => brightness == Brightness.light
+          ? PaymentRequestButtonTheme.light
+          : PaymentRequestButtonTheme.dark,
+    };
   }
 }

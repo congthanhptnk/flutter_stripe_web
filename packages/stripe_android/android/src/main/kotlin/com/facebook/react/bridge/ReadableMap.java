@@ -44,7 +44,7 @@ public class ReadableMap extends WritableMap {
 
     public Integer getInt(String key) throws Exception {
         if (map.opt(key) instanceof Double) {
-            throw new Exception("We've got a double here");
+            return (int) getDouble(key);
         }
         return map.getInt(key);
     }
@@ -84,6 +84,8 @@ public class ReadableMap extends WritableMap {
             if (value instanceof Boolean) {
                 return ReadableType.Boolean;
             } else if (value instanceof Iterable) {
+                return ReadableType.Array;
+            } else if (value instanceof JSONArray) {
                 return ReadableType.Array;
             } else if (value instanceof Number) {
                 return ReadableType.Number;

@@ -20,7 +20,6 @@ import 'keep_visible_on_focus.dart';
 class CardFormField extends StatefulWidget {
   const CardFormField({
     this.onCardChanged,
-    Key? key,
     this.onFocus,
     this.enablePostalCode = true,
     this.countryCode,
@@ -31,7 +30,8 @@ class CardFormField extends StatefulWidget {
     this.disabled = false,
     this.controller,
     this.preferredNetworks,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Callback that will be executed when a specific field gets focus.
   final CardFocusCallback? onFocus;
@@ -49,6 +49,8 @@ class CardFormField extends StatefulWidget {
   /// Defaults is `true`. If your configuration in Stripe requires a postalcode
   /// check as defined in https://stripe.com/docs/radar/rules#traditional-bank-checks
   /// make sure this one is set to `true`.
+  ///
+  /// This is only supported on android
   final bool enablePostalCode;
 
   /// Android only: Controls the postal code entry shown (when `enablePostalCode` is set to true).
@@ -96,7 +98,7 @@ class CardFormField extends StatefulWidget {
   _CardFormFieldState createState() => _CardFormFieldState();
 }
 
-abstract class CardFormFieldContext {
+mixin CardFormFieldContext {
   void focus();
   void blur();
 
@@ -214,10 +216,9 @@ class _MethodChannelCardFormField extends StatefulWidget {
   _MethodChannelCardFormField({
     this.onCardChanged,
     required this.controller,
-    Key? key,
     this.onFocus,
     this.style,
-    this.enablePostalCode = false,
+    this.enablePostalCode = true,
     double? width,
     double? height,
     BoxConstraints? constraints,
@@ -232,8 +233,7 @@ class _MethodChannelCardFormField extends StatefulWidget {
         constraints = (width != null || height != null)
             ? constraints?.tighten(width: width, height: height) ??
                 BoxConstraints.tightFor(width: width, height: height)
-            : constraints,
-        super(key: key);
+            : constraints;
 
   final BoxConstraints? constraints;
   final CardFocusCallback? onFocus;
@@ -316,8 +316,9 @@ class _MethodChannelCardFormFieldState
           controller._initalDetails != null)
         'cardDetails': controller._initalDetails?.toJson(),
       'autofocus': widget.autofocus,
-      'preferredNetworks':
-          widget.preferredNetworks?.map((e) => e.brandValue).toList(),
+      if (widget.preferredNetworks != null)
+        'preferredNetworks':
+            widget.preferredNetworks?.map((e) => e.brandValue).toList(),
       'disabled': widget.disabled,
       'defaultValues': {
         'countryCode': widget.countryCode,
@@ -523,11 +524,11 @@ class _MethodChannelCardFormFieldState
 
 class _AndroidCardFormField extends StatelessWidget {
   const _AndroidCardFormField({
-    Key? key,
     required this.viewType,
     required this.creationParams,
     required this.onPlatformViewCreated,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String viewType;
   final Map<String, dynamic> creationParams;
@@ -565,11 +566,11 @@ class _AndroidCardFormField extends StatelessWidget {
 
 class _UiKitCardFormField extends StatelessWidget {
   const _UiKitCardFormField({
-    Key? key,
     required this.viewType,
     required this.creationParams,
     required this.onPlatformViewCreated,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String viewType;
   final Map<String, dynamic> creationParams;
