@@ -12,7 +12,11 @@ import '../../flutter_stripe_web.dart';
 // TODO: should not use src of other package
 export 'package:stripe_js/src/api/elements/payment_element_options.dart';
 export 'package:stripe_js/stripe_api.dart'
-    show PaymentElementLayout, ElementAppearance, ElementTheme, ElementAppearanceLabels;
+    show
+        PaymentElementLayout,
+        ElementAppearance,
+        ElementTheme,
+        ElementAppearanceLabels;
 
 typedef PaymentElementTheme = js.ElementTheme;
 
@@ -168,13 +172,8 @@ class PaymentElementState extends State<PaymentElement> {
   @override
   Widget build(BuildContext context) {
     return Focus(
+      autofocus: true,
       focusNode: _effectiveNode,
-      onFocusChange: (focus) {
-        /*  if (focus)
-            element?.focus();
-          else
-            element?.blur(); */
-      },
       child: ConstrainedBox(
         constraints: BoxConstraints(
           maxWidth: double.infinity,
