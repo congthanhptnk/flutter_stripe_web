@@ -259,13 +259,14 @@ class PaymentSheetFragment(
           mapToPreferredNetworks(arguments?.getIntegerArrayList("preferredNetworks")),
         ).allowsRemovalOfLastSavedPaymentMethod(allowsRemovalOfLastSavedPaymentMethod)
         .cardBrandAcceptance(mapToCardBrandAcceptance(arguments))
+        .paymentMethodLayout(PaymentSheet.PaymentMethodLayout.Horizontal)
 
     primaryButtonLabel?.let { configurationBuilder.primaryButtonLabel(it) }
     paymentMethodOrder?.let { configurationBuilder.paymentMethodOrder(it) }
 
-    configurationBuilder.paymentMethodLayout(
-      mapToPaymentMethodLayout(arguments?.getString("paymentMethodLayout")),
-    )
+    // configurationBuilder.paymentMethodLayout(
+    //   mapToPaymentMethodLayout(arguments?.getString("paymentMethodLayout")),
+    // )
 
     paymentSheetConfiguration = configurationBuilder.build()
 
