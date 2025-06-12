@@ -1,7 +1,6 @@
 //@dart=2.12
 import 'dart:async';
 import 'dart:developer' as dev;
-import 'dart:ui' as ui;
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_stripe_web/flutter_stripe_web.dart';
@@ -162,13 +161,12 @@ class WebStripe extends StripePlatform {
         );
       },
       ideal: (paymentData) {
-        if (paymentData.bankName == null) throw 'bankName is required for web';
-        // https://stripe.com/docs/js/payment_intents/confirm_alipay_payment#stripe_confirm_alipay_payment-options
+        // https://stripe.com/docs/js/payment_intents/confirm_ideal_payment#stripe_confirm_ideal_payment-self_collected
         return js.confirmIdealPayment(
           paymentIntentClientSecret,
           data: stripe_js.ConfirmIdealPaymentData(
             paymentMethod: stripe_js.IdealPaymentMethodDetails.withBank(
-              ideal: stripe_js.IdealBankData(bank: paymentData.bankName!),
+              ideal: stripe_js.IdealBankData(bank: paymentData.bankName ?? ""),
             ),
             returnUrl: urlScheme,
             // recommended
@@ -205,13 +203,12 @@ class WebStripe extends StripePlatform {
 
   Future<PaymentIntent> confirmIdealPayment(String paymentIntentClientSecret, PaymentMethodDataIdeal paymentData,
       {String? returnUrl}) async {
-    if (paymentData.bankName == null) throw 'bankName is required for web';
-    // https://stripe.com/docs/js/payment_intents/confirm_alipay_payment#stripe_confirm_alipay_payment-options
+    // https://stripe.com/docs/js/payment_intents/confirm_ideal_payment#stripe_confirm_ideal_payment-self_collected
     final response = await js.confirmIdealPayment(
       paymentIntentClientSecret,
       data: stripe_js.ConfirmIdealPaymentData(
         paymentMethod: stripe_js.IdealPaymentMethodDetails.withBank(
-          ideal: stripe_js.IdealBankData(bank: paymentData.bankName!),
+          ideal: stripe_js.IdealBankData(bank: paymentData.bankName ?? ""),
         ),
         returnUrl: returnUrl ?? urlScheme,
       ),
@@ -482,7 +479,7 @@ class WebStripe extends StripePlatform {
   @override
   Widget buildPaymentRequestButton({
     Key? key,
-    required ui.VoidCallback onPressed,
+    required void Function() onPressed,
     required PlatformPayWebPaymentRequestCreateOptions paymentRequestCreateOptions,
     BoxConstraints? constraints,
     PlatformButtonType? type,
@@ -515,12 +512,18 @@ class WebStripe extends StripePlatform {
   }
 
   @override
-  Future<FinancialConnectionTokenResult> collectBankAccountToken({required String clientSecret}) {
+  Future<FinancialConnectionTokenResult> collectBankAccountToken({
+    required String clientSecret,
+    CollectBankAccountTokenParams? params,
+  }) {
     throw WebUnsupportedError.method('collectBankAccountToken');
   }
 
   @override
-  Future<FinancialConnectionSessionResult> collectFinancialConnectionsAccounts({required String clientSecret}) {
+  Future<FinancialConnectionSessionResult> collectFinancialConnectionsAccounts({
+    required String clientSecret,
+    CollectFinancialConnectionsAccountsParams? params = const CollectFinancialConnectionsAccountsParams(),
+  }) {
     throw WebUnsupportedError.method('collectFinancialConnectionsAccounts');
   }
 

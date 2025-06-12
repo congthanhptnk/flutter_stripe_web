@@ -20,6 +20,7 @@ class AffirmScreen extends StatelessWidget {
       },
       body: json.encode({
         'currency': 'usd',
+        'items': ['id-4', 'id-5'],
         'payment_method_types': ['affirm'],
       }),
     );
@@ -47,7 +48,7 @@ class AffirmScreen extends StatelessWidget {
       if (context.mounted) {
         scaffoldMessenger.showSnackBar(
           SnackBar(
-            content: Text('Payment succesfully completed'),
+            content: Text('Payment successfully completed'),
           ),
         );
       }

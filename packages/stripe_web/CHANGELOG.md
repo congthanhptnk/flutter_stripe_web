@@ -1,3 +1,21 @@
+## 6.5.1
+
+**Fixes**
+ - Make web compile for flutter 3.32.0
+
+## 6.5.0
+- Bug fixes
+ - Alignment with latest platform interface
+
+## 6.4.0
+
+**Features**
+- Add P24 support on Stripe web
+
+**Fixes**
+- Compliance with latest Dart analyzer
+- Prevent focus loop in Payment element for the web
+
 ## 6.3.0
 **Features**
 - Add support for any kind of payment method in setup intent with [confirmSetup]

@@ -168,13 +168,8 @@ class PaymentElementState extends State<PaymentElement> {
   @override
   Widget build(BuildContext context) {
     return Focus(
+      autofocus: true,
       focusNode: _effectiveNode,
-      onFocusChange: (focus) {
-        /*  if (focus)
-            element?.focus();
-          else
-            element?.blur(); */
-      },
       child: ConstrainedBox(
         constraints: BoxConstraints(
           maxWidth: double.infinity,
