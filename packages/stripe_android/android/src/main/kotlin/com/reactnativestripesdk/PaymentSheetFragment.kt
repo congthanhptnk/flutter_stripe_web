@@ -243,7 +243,7 @@ class PaymentSheetFragment : StripeFragment() {
     paymentMethodOrder?.let { configurationBuilder.paymentMethodOrder(it) }
 
     configurationBuilder.paymentMethodLayout(
-      mapToPaymentMethodLayout(arguments?.getString("paymentMethodLayout")),
+      mapToPaymentMethodLayout("Horizontal"),
     )
 
     paymentSheetConfiguration = configurationBuilder.build()
