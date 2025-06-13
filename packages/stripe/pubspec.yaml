@@ -22,9 +22,18 @@ dependencies:
   flutter:
     sdk: flutter
   meta: ^1.8.0
-  stripe_android: ^11.5.0
-  stripe_ios: ^11.5.0
-  stripe_platform_interface: ^11.5.1
+  stripe_android:
+    git:
+      url: https://github.com/congthanhptnk/flutter_stripe_web
+      path: ./packages/stripe_android
+  stripe_ios:
+    git:
+      url: https://github.com/congthanhptnk/flutter_stripe_web
+      path: ./packages/stripe_ios
+  stripe_platform_interface:
+    git:
+      url: https://github.com/congthanhptnk/flutter_stripe_web
+      path: ./packages/stripe_platform_interface
 dev_dependencies:
   flutter_test:
     sdk: flutter
