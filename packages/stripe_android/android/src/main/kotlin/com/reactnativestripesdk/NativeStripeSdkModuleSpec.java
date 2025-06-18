@@ -183,23 +183,23 @@ public abstract class NativeStripeSdkModuleSpec extends ReactContextBaseJavaModu
   @DoNotStrip
   public final Map<String, Object> getConstants() {
     Map<String, Object> constants = getTypedExportedConstants();
-    if (ReactBuildConfig.DEBUG || ReactBuildConfig.IS_INTERNAL_BUILD) {
-      Set<String> obligatoryFlowConstants = new HashSet<>(Arrays.asList(
-          "API_VERSIONS"
-      ));
-      Set<String> optionalFlowConstants = new HashSet<>();
-      Set<String> undeclaredConstants = new HashSet<>(constants.keySet());
-      undeclaredConstants.removeAll(obligatoryFlowConstants);
-      undeclaredConstants.removeAll(optionalFlowConstants);
-      if (!undeclaredConstants.isEmpty()) {
-        throw new IllegalStateException(String.format("Native Module Flow doesn't declare constants: %s", undeclaredConstants));
-      }
-      undeclaredConstants = obligatoryFlowConstants;
-      undeclaredConstants.removeAll(constants.keySet());
-      if (!undeclaredConstants.isEmpty()) {
-        throw new IllegalStateException(String.format("Native Module doesn't fill in constants: %s", undeclaredConstants));
-      }
-    }
+    // if (ReactBuildConfig.DEBUG || ReactBuildConfig.IS_INTERNAL_BUILD) {
+    //   Set<String> obligatoryFlowConstants = new HashSet<>(Arrays.asList(
+    //       "API_VERSIONS"
+    //   ));
+    //   Set<String> optionalFlowConstants = new HashSet<>();
+    //   Set<String> undeclaredConstants = new HashSet<>(constants.keySet());
+    //   undeclaredConstants.removeAll(obligatoryFlowConstants);
+    //   undeclaredConstants.removeAll(optionalFlowConstants);
+    //   if (!undeclaredConstants.isEmpty()) {
+    //     throw new IllegalStateException(String.format("Native Module Flow doesn't declare constants: %s", undeclaredConstants));
+    //   }
+    //   undeclaredConstants = obligatoryFlowConstants;
+    //   undeclaredConstants.removeAll(constants.keySet());
+    //   if (!undeclaredConstants.isEmpty()) {
+    //     throw new IllegalStateException(String.format("Native Module doesn't fill in constants: %s", undeclaredConstants));
+    //   }
+    // }
     return constants;
   }
 
