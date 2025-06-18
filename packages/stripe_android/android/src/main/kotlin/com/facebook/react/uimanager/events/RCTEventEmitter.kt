@@ -1,12 +1,14 @@
 package com.facebook.react.uimanager.events
 
+import android.os.Handler
+import android.os.Looper
 import com.facebook.react.bridge.ReadableMap
-import com.facebook.react.bridge.WritableMap
 import io.flutter.plugin.common.MethodChannel
 
 class RCTEventEmitter(private val channel: MethodChannel) {
+    private val uiThread = Handler(Looper.getMainLooper())
 
     fun receiveEvent(viewTag: Any, eventName: String, serializeEventData: ReadableMap?) {
-        channel.invokeMethod(eventName, serializeEventData)
+        uiThread.post { channel.invokeMethod(eventName, serializeEventData) }
     }
 }
