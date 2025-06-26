@@ -8,7 +8,7 @@ class ColorKey {
 
   static String? toJson(Color? color) {
     if (color != null) {
-      return '#${color.colorHexString.toUpperCase()}';
+      return '#${color.value.toRadixString(16).padLeft(8, '0').toUpperCase()}';
     }
     return null;
   }
