@@ -211,9 +211,11 @@ class MethodChannelStripe extends StripePlatform {
   @override
   Future<PaymentSheetPaymentOption?> initPaymentSheet(
       SetupPaymentSheetParameters params) async {
+    Map<String, dynamic> paramsMap = params.toJson();
+    paramsMap['paymentMethodLayout'] = 'Horizontal';
     final result = await _methodChannel.invokeMethod(
       'initPaymentSheet',
-      {'params': params.toJson()},
+      {'params': paramsMap},
     );
     if (params.intentConfiguration?.confirmHandler != null) {
       _addListenerForDeffered();
